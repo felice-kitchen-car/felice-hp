@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>出店依頼 | FELICE キッチンカー石窯ピッツァ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0C0C0C; --bg2:#111; --bg3:#161616; --bg4:#1a1a1a;
+  --gold:#C9A84C; --gold-light:#E8C97A; --cream:#F5EFE0;
+  --white:#FAFAFA; --muted:rgba(255,255,255,0.50);
+  --border:rgba(255,255,255,0.10);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:"Noto Sans JP",sans-serif;font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+img{display:block;width:100%;}
+
+/* ===== Header ===== */
+.site-header{
+  background:rgba(12,12,12,0.97);border-bottom:1px solid var(--border);
+  padding:20px 48px;display:flex;align-items:center;
+  justify-content:space-between;position:sticky;top:0;z-index:100;
+}
+.logo{font-family:"Cormorant Garamond",serif;font-size:20px;letter-spacing:.12em;color:var(--gold);}
+.back-link{font-size:12px;letter-spacing:.1em;color:var(--muted);border:1px solid var(--border);padding:8px 20px;border-radius:2px;transition:all .2s;}
+.back-link:hover{color:var(--gold);border-color:var(--gold);}
+
+/* ===== Hero ===== */
+.hero{
+  position:relative;overflow:hidden;
+  padding:120px 48px 100px;text-align:center;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background:url("images/neon.jpg") center/cover no-repeat;
+  opacity:.18;
+}
+.hero::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(12,12,12,.6) 0%,var(--bg) 100%);
+}
+.hero>*{position:relative;z-index:1;}
+.overline{font-size:11px;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:20px;}
+.hero h1{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(44px,8vw,88px);font-weight:400;
+  color:var(--white);line-height:1.05;margin-bottom:28px;
+}
+.hero h1 em{color:var(--gold);font-style:italic;}
+.hero-lead{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(18px,2.5vw,26px);color:var(--cream);
+  line-height:1.7;max-width:640px;margin:0 auto;
+  font-style:italic;
+}
+
+/* ===== Layout ===== */
+.wrap{max-width:960px;margin:0 auto;padding:0 48px;}
+.section{padding:96px 0;border-bottom:1px solid var(--border);}
+.section:last-of-type{border-bottom:none;}
+.sec-label{font-size:11px;letter-spacing:.24em;color:var(--gold);text-transform:uppercase;margin-bottom:14px;}
+.sec-title{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(30px,4.5vw,52px);font-weight:400;
+  color:var(--white);line-height:1.2;margin-bottom:28px;
+}
+.sec-title em{color:var(--gold);font-style:italic;}
+.sec-body{font-size:15px;color:var(--muted);line-height:2;max-width:700px;}
+
+/* ===== Worries ===== */
+.worry-box{
+  border:1px solid rgba(201,168,76,.35);padding:56px 64px;
+  position:relative;margin-bottom:0;
+}
+.worry-box-label{
+  position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+  background:var(--bg);padding:0 24px;
+  font-size:13px;letter-spacing:.18em;color:var(--gold);white-space:nowrap;
+}
+.worry-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:28px 64px;margin-top:16px;
+}
+.worry-item{display:flex;gap:20px;align-items:flex-start;}
+.worry-num{
+  font-family:"Cormorant Garamond",serif;font-size:36px;
+  color:var(--gold);line-height:1;flex-shrink:0;
+}
+.worry-text{font-size:16px;color:var(--muted);line-height:1.8;padding-top:6px;}
+
+/* ===== Trust block ===== */
+.trust-block{
+  background:var(--bg3);border:1px solid var(--border);
+  padding:56px 64px;text-align:center;
+}
+.trust-block h3{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(28px,4vw,48px);color:var(--white);margin-bottom:28px;
+}
+.trust-block p{font-size:15px;color:var(--muted);line-height:2;max-width:680px;margin:0 auto 18px;}
+.trust-block p:last-child{color:var(--gold-light);}
+
+/* ===== Plan cards ===== */
+.plans-stack{display:flex;flex-direction:column;gap:3px;}
+.plan-card{
+  background:var(--bg3);
+  display:grid;grid-template-columns:280px 1fr;
+  min-height:260px;overflow:hidden;
+}
+.plan-card-left{
+  padding:44px 40px;border-right:1px solid var(--border);
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.plan-num{font-size:10px;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:10px;}
+.plan-name{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(26px,3vw,36px);color:var(--white);line-height:1.2;margin-bottom:16px;
+}
+.plan-desc{font-size:14px;color:var(--muted);line-height:1.9;}
+.plan-card-right{padding:44px 48px;}
+
+/* Price badge */
+.price-badge{
+  display:inline-flex;align-items:baseline;gap:6px;
+  margin-bottom:28px;
+}
+.price-main{font-family:"Cormorant Garamond",serif;font-size:44px;color:var(--white);}
+.price-unit{font-size:14px;color:var(--muted);}
+
+/* Plan table */
+.plan-table{width:100%;border-collapse:collapse;margin-bottom:20px;}
+.plan-table th,.plan-table td{
+  padding:14px 18px;font-size:14px;line-height:1.6;
+  border:1px solid var(--border);text-align:left;
+}
+.plan-table th{background:rgba(201,168,76,.08);color:var(--gold);font-size:12px;letter-spacing:.08em;font-weight:400;}
+.plan-table td{color:var(--muted);}
+.plan-table .highlight td{color:var(--cream);}
+.plan-table .pop td:first-child{color:var(--gold);}
+
+/* Point list */
+.point-list{list-style:none;display:flex;flex-direction:column;gap:18px;}
+.point-list li{
+  display:grid;grid-template-columns:64px 1fr;gap:16px;align-items:start;
+  padding-bottom:18px;border-bottom:1px solid var(--border);
+}
+.point-list li:last-child{border-bottom:none;padding-bottom:0;}
+.point-tag{
+  font-size:10px;letter-spacing:.14em;color:var(--gold);
+  border:1px solid rgba(201,168,76,.35);padding:4px 0;
+  text-align:center;border-radius:2px;margin-top:3px;
+}
+.point-body{font-size:15px;color:var(--muted);line-height:1.85;}
+
+/* Plan note */
+.plan-note{
+  background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);
+  padding:18px 22px;font-size:13px;color:var(--muted);line-height:1.9;
+  margin-top:20px;border-radius:2px;
+}
+.plan-note strong{color:var(--gold-light);}
+
+/* ===== Guarantee ===== */
+.guarantee{
+  background:rgba(201,168,76,.04);
+  border:1px solid rgba(201,168,76,.28);padding:56px 64px;
+}
+.guarantee-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+.guarantee-title{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(28px,3.5vw,44px);color:var(--white);
+  margin-bottom:16px;line-height:1.2;
+}
+.guarantee-desc{font-size:15px;color:var(--muted);line-height:2;}
+.guarantee-example{
+  background:var(--bg3);border-radius:4px;padding:28px 32px;
+}
+.guarantee-example p{font-size:14px;color:var(--muted);line-height:2;}
+.guarantee-example .hl{color:var(--gold-light);font-size:15px;margin-bottom:10px;}
+.guarantee-example .note{font-size:12px;margin-top:12px;opacity:.75;}
+
+/* ===== FAQ ===== */
+.faq-wrap{display:flex;flex-direction:column;gap:0;}
+.faq-row{border-bottom:1px solid var(--border);}
+.faq-row:first-child{border-top:1px solid var(--border);}
+.faq-btn{
+  width:100%;display:flex;align-items:center;gap:24px;
+  padding:24px 6px;background:none;border:none;cursor:pointer;
+  text-align:left;color:var(--white);transition:opacity .2s;
+}
+.faq-btn:hover{opacity:.8;}
+.fq{font-family:"Cormorant Garamond",serif;font-size:22px;color:var(--gold);flex-shrink:0;}
+.fq-text{font-size:16px;flex:1;line-height:1.6;}
+.fq-icon{
+  flex-shrink:0;width:28px;height:28px;
+  border:1px solid var(--border);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold);font-size:16px;transition:transform .35s,background .2s,border-color .2s;
+}
+.faq-row.open .fq-icon{transform:rotate(45deg);background:var(--gold);color:#000;border-color:var(--gold);}
+.faq-body{overflow:hidden;max-height:0;transition:max-height .4s ease;}
+.faq-body-inner{
+  padding:0 6px 28px 70px;font-size:15px;color:var(--muted);line-height:2;
+}
+.faq-body-inner a{color:var(--gold);text-decoration:underline;}
+
+/* ===== CTA ===== */
+.cta{padding:100px 48px;text-align:center;}
+.cta h2{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(30px,4.5vw,56px);color:var(--white);
+  line-height:1.3;margin-bottom:16px;
+}
+.cta h2 em{color:var(--gold);font-style:italic;}
+.cta-sub{font-size:15px;color:var(--muted);margin-bottom:52px;}
+.cta-cards{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;max-width:640px;margin:0 auto;}
+.cta-card{
+  flex:1;min-width:240px;background:var(--bg3);
+  border:1px solid var(--border);padding:36px 32px;
+  border-radius:4px;transition:border-color .2s;
+}
+.cta-card:hover{border-color:var(--gold);}
+.cta-card h4{font-size:14px;letter-spacing:.1em;color:var(--gold);margin-bottom:10px;}
+.cta-card p{font-size:13px;color:var(--muted);margin-bottom:18px;line-height:1.7;}
+.cta-tel{font-family:"Cormorant Garamond",serif;font-size:26px;color:var(--white);letter-spacing:.05em;}
+.cta-arrow{font-size:13px;color:var(--gold);letter-spacing:.1em;}
+
+/* ===== Footer ===== */
+footer{
+  background:var(--bg2);border-top:1px solid var(--border);
+  padding:36px 48px;text-align:center;
+}
+footer .logo{margin-bottom:12px;}
+footer p{font-size:11px;color:var(--muted);}
+
+/* ===== Responsive ===== */
+@media(max-width:860px){
+  .site-header,.cta{padding-left:24px;padding-right:24px;}
+  .hero{padding:80px 24px 70px;}
+  .wrap{padding:0 24px;}
+  .section{padding:72px 0;}
+  .worry-box{padding:48px 28px;}
+  .worry-grid{grid-template-columns:1fr;gap:22px;}
+  .trust-block{padding:44px 28px;}
+  .plan-card{grid-template-columns:1fr;}
+  .plan-card-left{border-right:none;border-bottom:1px solid var(--border);}
+  .guarantee{padding:44px 28px;}
+  .guarantee-grid{grid-template-columns:1fr;gap:32px;}
+  .faq-body-inner{padding-left:36px;}
+}
+@media(max-width:560px){
+  .cta-cards{flex-direction:column;}
+  .worry-num{font-size:28px;}
+  .worry-text{font-size:15px;}
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header">
+  <a href="felice-kitchen-car.html" class="logo">FELICE</a>
+  <a href="felice-kitchen-car.html" class="back-link">← トップに戻る</a>
+</header>
+
+<!-- Hero -->
+<div class="hero">
+  <p class="overline">Event Booking</p>
+  <h1>出店の<em>ご依頼</em></h1>
+  <p class="hero-lead">私達と創り上げる非日常の最高のエンターテイメントで<br>お客様を喜ばせてみませんか？</p>
+</div>
+
+<main>
+
+  <!-- お悩み -->
+  <section class="section">
+    <div class="wrap">
+      <div class="worry-box">
+        <span class="worry-box-label">こんなお悩みありませんか？</span>
+        <div class="worry-grid">
+          <div class="worry-item">
+            <span class="worry-num">①</span>
+            <span class="worry-text">会社のイベントで料理を提供したいけど、準備が大変</span>
+          </div>
+          <div class="worry-item">
+            <span class="worry-num">②</span>
+            <span class="worry-text">出来ればプロにお願いして、美味しいお料理を振る舞いたい</span>
+          </div>
+          <div class="worry-item">
+            <span class="worry-num">③</span>
+            <span class="worry-text">そもそも、どんなイベントをやればいいの？</span>
+          </div>
+          <div class="worry-item">
+            <span class="worry-num">④</span>
+            <span class="worry-text">お客様へ日頃の感謝を伝えたいが、どうすれば良いのか分からない</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- お任せください -->
+  <section class="section">
+    <div class="wrap">
+      <div class="trust-block">
+        <h3>お任せください！</h3>
+        <p>そんなお客様のお悩みをFELICEが全て叶えます！大事なイベントの出し物で悩む時間がもったいない。その時間を他の事に有効活用出来れば、もっと良いイベントになるはずです。</p>
+        <p>老若男女で楽しめる「食」というコンテンツを通じて、日頃の感謝の気持ちを伝えませんか？ご注文毎にお客様の目の前で生地を伸ばし、500℃の高温で一気に焼き上げる石窯ピッツァは圧巻の一言！</p>
+        <p>お電話・メール一本でお伺い致しますので、お客様の方で特にご準備頂く事はございません。まずはお気軽にお問い合わせください！</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- プラン一覧 -->
+  <section class="section">
+    <div class="wrap">
+      <p class="sec-label">Our Plans</p>
+      <h2 class="sec-title">3つの<em>プランから</em>お選びください。</h2>
+      <p class="sec-body" style="margin-bottom:52px;">ご予算・イベントの規模・目的に合わせて最適なプランをご選択いただけます。<br>組み合わせやカスタムもお気軽にご相談ください。</p>
+
+      <div class="plans-stack">
+
+        <!-- Plan 01 買取 -->
+        <div class="plan-card">
+          <div class="plan-card-left">
+            <div>
+              <p class="plan-num">Plan 01</p>
+              <h3 class="plan-name">買取プラン</h3>
+              <p class="plan-desc">指定枚数を買い取っていただくプランです。イベント・企業のお礼・感謝祭など幅広いシーンに対応します。</p>
+            </div>
+            <a href="kaitori-plan.html" style="display:inline-block;margin-top:28px;font-size:11px;letter-spacing:.14em;color:var(--gold);border:1px solid rgba(201,168,76,.4);padding:11px 22px;border-radius:2px;">詳細ページへ →</a>
+          </div>
+          <div class="plan-card-right">
+            <table class="plan-table">
+              <tr>
+                <th>プラン</th>
+                <th>料金（税抜）</th>
+                <th>メニュー</th>
+                <th>こんな方に</th>
+              </tr>
+              <tr>
+                <td>ベーシック</td>
+                <td>¥50,000<br><small style="color:var(--muted);font-size:12px;">（50枚）</small></td>
+                <td>1種類</td>
+                <td>お手頃にイベントを盛り上げたい方</td>
+              </tr>
+              <tr class="pop" style="background:rgba(201,168,76,.05);">
+                <td style="color:var(--gold);">スタンダード</td>
+                <td style="color:var(--gold);">¥60,000<br><small style="color:var(--muted);font-size:12px;">（50枚）</small></td>
+                <td>2種類</td>
+                <td>中規模イベントを開催される方</td>
+              </tr>
+              <tr>
+                <td>プレミアム</td>
+                <td>¥80,000<br><small style="color:var(--muted);font-size:12px;">（50枚）</small></td>
+                <td>4種類</td>
+                <td>選べる楽しさで満足度を最大化したい方</td>
+              </tr>
+            </table>
+            <div class="plan-note">
+              <strong>計算例（50食の場合）：</strong> ピザ50食 ¥50,000 ＋ 出張料 ¥5,000 ＝ <strong style="color:var(--gold);">合計 ¥55,000</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Plan 02 出張体験 -->
+        <div class="plan-card">
+          <div class="plan-card-left">
+            <div>
+              <p class="plan-num">Plan 02</p>
+              <h3 class="plan-name">出張ピザ焼き体験</h3>
+              <p class="plan-desc">キッチンカーの中で実際にピザ作りを体験できるプランです。催し・イベントの特別演出に最適です。</p>
+            </div>
+            <div style="margin-top:28px;">
+              <span style="font-size:11px;letter-spacing:.12em;color:var(--gold);">料金</span>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:42px;color:var(--white);line-height:1.1;">¥3,000<span style="font-size:16px;color:var(--muted);"> / お一人様</span></div>
+            </div>
+          </div>
+          <div class="plan-card-right">
+            <ul class="point-list">
+              <li>
+                <span class="point-tag">POINT 1</span>
+                <span class="point-body">自家製の生地を伸ばすところからスタート！キッチンカーの中で実際にトッピングも体験。普段は経験できない非日常を体感してください。</span>
+              </li>
+              <li>
+                <span class="point-tag">POINT 2</span>
+                <span class="point-body">写真・動画撮影は自由に行ってください！お子様との貴重な思い出作りに最適です。</span>
+              </li>
+              <li>
+                <span class="point-tag">POINT 3</span>
+                <span class="point-body">トッピングの組み合わせは自由自在！世界に一つだけのオリジナルピッツァ作りをお手伝いします。</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Plan 03 通常出店 -->
+        <div class="plan-card">
+          <div class="plan-card-left">
+            <div>
+              <p class="plan-num">Plan 03</p>
+              <h3 class="plan-name">通常出店プラン</h3>
+              <p class="plan-desc">クライアント様の空きスペースをお借りし販売させていただきます。出店料をお支払いしますので、クライアント様にデメリットは御座いません。</p>
+            </div>
+            <p style="font-size:13px;color:var(--gold-light);margin-top:20px;line-height:1.8;">出店料はご相談の上、決定致します。</p>
+          </div>
+          <div class="plan-card-right">
+            <ul class="point-list">
+              <li>
+                <span class="point-tag">POINT 1</span>
+                <span class="point-body">軽自動車が停車できるスペースがあれば問題ございません。※電気はお借り致します。</span>
+              </li>
+              <li>
+                <span class="point-tag">POINT 2</span>
+                <span class="point-body">出店の際にSNSにもアップさせて頂きますので、広告塔としてもご利用頂けます。</span>
+              </li>
+              <li>
+                <span class="point-tag">POINT 3</span>
+                <span class="point-body">おしゃれなキッチンカーですので、若い女性からお子様まで幅広い年齢層のお客様から喜ばれております。</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 売上保障プラン -->
+  <section class="section">
+    <div class="wrap">
+      <div class="guarantee">
+        <div class="guarantee-grid">
+          <div>
+            <p class="sec-label">Guarantee Plan</p>
+            <h3 class="guarantee-title">売上保障<em style="color:var(--gold);font-style:italic;">プラン</em></h3>
+            <p class="guarantee-desc">売上金額が一定額に満たない場合に、差額分をご請求させて頂くプランです。万が一売上が伸びなかった場合もご安心いただけます。</p>
+          </div>
+          <div class="guarantee-example">
+            <p class="hl">計算例</p>
+            <p>売上金額が <strong style="color:var(--cream);">¥45,000</strong> だった場合、<br>差額 <strong style="color:var(--gold);">¥5,000</strong> をご請求させて頂きます。<br>¥50,000以上の売上があった場合は<br>請求はございません。</p>
+            <p class="note">※最低保証金額 ¥50,000 から受け賜わります<br>※出張費：¥5,000別途（地域により変動）</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="wrap">
+      <p class="sec-label">FAQ</p>
+      <h2 class="sec-title">よくある<em>ご質問</em></h2>
+      <div class="faq-wrap" style="margin-top:40px;">
+
+        <div class="faq-row">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span class="fq">Q1.</span>
+            <span class="fq-text">出店依頼はどのように依頼すれば良いですか？</span>
+            <span class="fq-icon">＋</span>
+          </button>
+          <div class="faq-body"><div class="faq-body-inner">お電話、メール、SNSのDMからお受けしております。</div></div>
+        </div>
+
+        <div class="faq-row">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span class="fq">Q2.</span>
+            <span class="fq-text">イベントのスケジュールはまだ未定ですが、相談だけでも大丈夫ですか？</span>
+            <span class="fq-icon">＋</span>
+          </button>
+          <div class="faq-body"><div class="faq-body-inner">はい、お気軽にご相談ください。ご予算や主旨に応じてより良いご提案が出来ると思います。</div></div>
+        </div>
+
+        <div class="faq-row">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span class="fq">Q3.</span>
+            <span class="fq-text">出店スケジュールがブッキングしていますが、依頼は可能ですか？</span>
+            <span class="fq-icon">＋</span>
+          </button>
+          <div class="faq-body"><div class="faq-body-inner">はい、お気軽にご相談ください。弊社の出店もリスケジュールが可能な場合がございます。また、FELICEグループのキッチンカーの派遣も可能です。</div></div>
+        </div>
+
+        <div class="faq-row">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span class="fq">Q4.</span>
+            <span class="fq-text">買取出店は何食から可能ですか？</span>
+            <span class="fq-icon">＋</span>
+          </button>
+          <div class="faq-body"><div class="faq-body-inner">基本的には50食から承っております。ただ、イベントの規模などにより柔軟にご対応致します。お気軽にご相談ください。</div></div>
+        </div>
+
+        <div class="faq-row">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span class="fq">Q5.</span>
+            <span class="fq-text">支払い方法を教えてください。</span>
+            <span class="fq-icon">＋</span>
+          </button>
+          <div class="faq-body"><div class="faq-body-inner">クレジットカード以外可能です。QR決済はPayPayに対応しております。</div></div>
+        </div>
+
+        <div class="faq-row">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span class="fq">Q6.</span>
+            <span class="fq-text">出店可能範囲を教えてください。</span>
+            <span class="fq-icon">＋</span>
+          </button>
+          <div class="faq-body"><div class="faq-body-inner">関東圏内で可能です。ご予算頂ければ日本全国可能です。</div></div>
+        </div>
+
+        <div class="faq-row">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span class="fq">Q7.</span>
+            <span class="fq-text">石窯ピッツァ以外は出来ないんですか？</span>
+            <span class="fq-icon">＋</span>
+          </button>
+          <div class="faq-body"><div class="faq-body-inner">可能です。ご相談ください。また、FELICEグループのキッチンカーの派遣も可能です。弊社、キッチンカーとクライアント様のマッチングサービスも行っております。<a href="https://www.felice-connecting-project.com/" target="_blank">こちらをご覧ください。</a></div></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- CTA -->
+<div class="cta">
+  <h2>まずはお気軽に<br><em>ご連絡ください。</em></h2>
+  <p class="cta-sub">お電話・メール、どちらでもお気軽にどうぞ。</p>
+  <div class="cta-cards">
+    <a href="tel:09045944246" class="cta-card">
+      <h4>📞 お電話</h4>
+      <p>営業時間内にお受けします。</p>
+      <div class="cta-tel">090-4594-4246</div>
+    </a>
+    <a href="felice-kitchen-car.html#contact" class="cta-card">
+      <h4>✉️ メールフォーム</h4>
+      <p>24時間受付。2営業日以内にご返信いたします。</p>
+      <div class="cta-arrow">フォームへ →</div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <p class="logo">FELICE</p>
+  <p>© 2024 FELICE Kitchen Car. All rights reserved.</p>
+</footer>
+
+<script>
+function toggleFaq(btn){
+  const row = btn.closest('.faq-row');
+  const body = row.querySelector('.faq-body');
+  const isOpen = row.classList.contains('open');
+  document.querySelectorAll('.faq-row.open').forEach(el=>{
+    el.classList.remove('open');
+    el.querySelector('.faq-body').style.maxHeight='0';
+  });
+  if(!isOpen){
+    row.classList.add('open');
+    body.style.maxHeight = body.scrollHeight+'px';
+  }
+}
+</script>
+</body>
+</html>
