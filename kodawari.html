@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ピザへのこだわり | FELICE キッチンカー石窯ピッツァ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0C0C0C;--bg2:#111;--bg3:#161616;--bg4:#1a1a1a;
+  --gold:#C9A84C;--gold-light:#E8C97A;--cream:#F5EFE0;
+  --white:#FAFAFA;--muted:rgba(255,255,255,.50);
+  --border:rgba(255,255,255,.10);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:"Noto Sans JP",sans-serif;font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+img{display:block;width:100%;height:100%;object-fit:cover;}
+
+/* Header */
+.site-header{background:rgba(12,12,12,.97);border-bottom:1px solid var(--border);padding:20px 48px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.logo{font-family:"Cormorant Garamond",serif;font-size:20px;letter-spacing:.12em;color:var(--gold);}
+.back-link{font-size:12px;letter-spacing:.1em;color:var(--muted);border:1px solid var(--border);padding:8px 20px;border-radius:2px;transition:all .2s;}
+.back-link:hover{color:var(--gold);border-color:var(--gold);}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;min-height:560px;display:flex;align-items:center;justify-content:center;text-align:center;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{width:100%;height:100%;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,12,12,.55) 0%,rgba(12,12,12,.85) 100%);}
+.hero-content{position:relative;z-index:1;padding:100px 48px;}
+.overline{font-size:11px;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:20px;}
+.hero h1{font-family:"Cormorant Garamond",serif;font-size:clamp(46px,8vw,92px);font-weight:400;color:var(--white);line-height:1.05;margin-bottom:24px;}
+.hero h1 em{color:var(--gold);font-style:italic;}
+.hero-lead{font-size:16px;color:var(--muted);max-width:560px;margin:0 auto;line-height:2;}
+
+/* Layout */
+.wrap{max-width:980px;margin:0 auto;padding:0 48px;}
+.section{padding:100px 0;border-bottom:1px solid var(--border);}
+.section:last-of-type{border-bottom:none;}
+.sec-label{font-size:11px;letter-spacing:.24em;color:var(--gold);text-transform:uppercase;margin-bottom:14px;}
+.sec-title{font-family:"Cormorant Garamond",serif;font-size:clamp(32px,5vw,56px);font-weight:400;color:var(--white);line-height:1.15;margin-bottom:32px;}
+.sec-title em{color:var(--gold);font-style:italic;}
+.body-lg{font-size:16px;color:var(--muted);line-height:2.1;max-width:680px;}
+
+/* ===== Feature Blocks ===== */
+/* big 2-col: image + text alternating */
+.feature-block{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  min-height:520px;margin-bottom:3px;overflow:hidden;
+}
+.feature-block.reverse{direction:rtl;}
+.feature-block.reverse>*{direction:ltr;}
+.feature-img{position:relative;min-height:460px;}
+.feature-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.feature-body{
+  background:var(--bg3);padding:72px 64px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.feat-num{
+  font-family:"Cormorant Garamond",serif;font-size:72px;
+  color:rgba(201,168,76,.12);line-height:1;margin-bottom:-8px;
+}
+.feat-label{font-size:10px;letter-spacing:.24em;color:var(--gold);text-transform:uppercase;margin-bottom:14px;}
+.feat-title{font-family:"Cormorant Garamond",serif;font-size:clamp(26px,3.5vw,40px);color:var(--white);line-height:1.25;margin-bottom:24px;}
+.feat-title em{color:var(--gold);font-style:italic;}
+.feat-body{font-size:15px;color:var(--muted);line-height:2.1;}
+.feat-badge{
+  display:inline-flex;align-items:center;gap:12px;
+  background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25);
+  padding:14px 22px;border-radius:2px;margin-top:28px;
+}
+.feat-badge-num{font-family:"Cormorant Garamond",serif;font-size:32px;color:var(--gold);line-height:1;}
+.feat-badge-text{font-size:12px;color:var(--muted);line-height:1.5;}
+
+/* ===== Stats row ===== */
+.stats-row{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:3px;
+  margin:80px 0 0;
+}
+.stat{background:var(--bg3);padding:40px 28px;text-align:center;}
+.stat-num{font-family:"Cormorant Garamond",serif;font-size:52px;color:var(--gold);line-height:1;margin-bottom:10px;}
+.stat-label{font-size:12px;color:var(--muted);line-height:1.6;}
+
+/* ===== Process timeline ===== */
+.timeline{display:flex;flex-direction:column;gap:0;margin-top:48px;}
+.timeline-item{
+  display:grid;grid-template-columns:64px 1fr;gap:0;
+  padding:36px 0;border-bottom:1px solid var(--border);
+}
+.timeline-item:last-child{border-bottom:none;}
+.tl-num{
+  font-family:"Cormorant Garamond",serif;font-size:40px;
+  color:rgba(201,168,76,.25);line-height:1;padding-top:2px;
+}
+.tl-body{}
+.tl-title{font-size:18px;color:var(--cream);margin-bottom:10px;line-height:1.4;}
+.tl-title em{color:var(--gold);font-style:normal;}
+.tl-text{font-size:15px;color:var(--muted);line-height:2;}
+
+/* ===== Full-width quote ===== */
+.quote-block{
+  position:relative;overflow:hidden;
+  padding:120px 48px;text-align:center;
+}
+.quote-block::before{
+  content:"";position:absolute;inset:0;
+  background:url("images/pizza-kiln.jpg") center/cover no-repeat;
+  opacity:.2;
+}
+.quote-block::after{
+  content:"";position:absolute;inset:0;
+  background:rgba(12,12,12,.7);
+}
+.quote-block>*{position:relative;z-index:1;}
+.quote-text{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(22px,4vw,48px);color:var(--cream);
+  font-style:italic;line-height:1.5;max-width:800px;
+  margin:0 auto 24px;
+}
+.quote-text em{color:var(--gold);}
+.quote-sub{font-size:14px;color:var(--muted);letter-spacing:.1em;}
+
+/* ===== CTA ===== */
+.cta{padding:100px 48px;text-align:center;}
+.cta h2{font-family:"Cormorant Garamond",serif;font-size:clamp(28px,4vw,52px);color:var(--white);margin-bottom:16px;line-height:1.3;}
+.cta h2 em{color:var(--gold);font-style:italic;}
+.cta-sub{font-size:15px;color:var(--muted);margin-bottom:48px;}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.btn-gold{background:var(--gold);color:#000;font-size:13px;letter-spacing:.14em;padding:16px 44px;border-radius:2px;font-weight:500;transition:opacity .2s;}
+.btn-gold:hover{opacity:.85;}
+.btn-outline{border:1px solid var(--border);color:var(--white);font-size:13px;letter-spacing:.14em;padding:16px 44px;border-radius:2px;transition:all .2s;}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+
+/* Footer */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:36px 48px;text-align:center;}
+footer .logo{margin-bottom:12px;}
+footer p{font-size:11px;color:var(--muted);}
+
+/* Responsive */
+@media(max-width:860px){
+  .site-header,.cta,.quote-block{padding-left:24px;padding-right:24px;}
+  .hero-content{padding:80px 24px;}
+  .wrap{padding:0 24px;}
+  .section{padding:72px 0;}
+  .feature-block,.feature-block.reverse{grid-template-columns:1fr;direction:ltr;}
+  .feature-img{min-height:300px;}
+  .feature-body{padding:48px 28px;}
+  .feat-num{font-size:52px;}
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .timeline-item{grid-template-columns:48px 1fr;}
+  .tl-num{font-size:30px;}
+}
+@media(max-width:540px){
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .cta-btns{flex-direction:column;align-items:center;}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="felice-kitchen-car.html" class="logo">FELICE</a>
+  <a href="felice-kitchen-car.html#about" class="back-link">← FELICEについてに戻る</a>
+</header>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-bg"><img src="images/pizza-margherita.jpg" alt=""></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="overline">Our Commitment</p>
+    <h1>ピザへの、<br><em>本気のこだわり。</em></h1>
+    <p class="hero-lead">「本物のおいしさを、どこへでも」——<br>私たちが妥協しない理由と、素材・製法へのこだわりを全てお伝えします。</p>
+  </div>
+</div>
+
+<main>
+
+  <!-- イントロ -->
+  <section class="section">
+    <div class="wrap">
+      <p class="sec-label">Philosophy</p>
+      <h2 class="sec-title">おいしさは、<br><em>嘘をつかない。</em></h2>
+      <p class="body-lg">500℃以上の高温で焼き上げる石窯ピッツァは、外はサクッと中はジューシー。その美味しさを支えるのは、生地・チーズ・燃料・石窯——全ての要素への妥協なきこだわりです。</p>
+      <div class="stats-row">
+        <div class="stat">
+          <div class="stat-num">500<span style="font-size:28px;">℃+</span></div>
+          <div class="stat-label">石窯の焼成温度<br>高温で一気に焼き上げ</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">90<span style="font-size:28px;">秒</span></div>
+          <div class="stat-label">焼き上げ時間<br>シズルが止まらない</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">100<span style="font-size:28px;">%</span></div>
+          <div class="stat-label">国産認定小麦使用<br>ナポリピッツァ協会認定</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">D.O.P</div>
+          <div class="stat-label">原産地名称保護<br>モッツァレラチーズ</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- こだわり1: 生地 -->
+  <div class="feature-block">
+    <div class="feature-img">
+      <img src="images/pizza-margherita.jpg" alt="自家製生地">
+    </div>
+    <div class="feature-body">
+      <div class="feat-num">01</div>
+      <p class="feat-label">Dough — 生地</p>
+      <h3 class="feat-title">ナポリ認定の<br><em>希少な国産小麦</em></h3>
+      <p class="feat-body">ピッツァの命でもある生地には、国産で唯一ナポリピッツァ協会から認定を受けた<strong style="color:var(--cream);">北海道江別産の希少な国産小麦</strong>を使用しています。<br><br>ご注文を頂いてから数日間低温熟成させた自家製生地を、お客様の目の前で丁寧に仕上げます。そのシズル感と焼き立ての香りこそが、FELICEだけの体験です。</p>
+      <div class="feat-badge">
+        <span class="feat-badge-num">72h+</span>
+        <span class="feat-badge-text">低温熟成時間<br>じっくり旨味を引き出す</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- こだわり2: チーズ -->
+  <div class="feature-block reverse">
+    <div class="feature-img">
+      <img src="images/pizza-half.jpg" alt="モッツァレラチーズ">
+    </div>
+    <div class="feature-body">
+      <div class="feat-num">02</div>
+      <p class="feat-label">Cheese — チーズ</p>
+      <h3 class="feat-title">D.O.P.認定の<br><em>本物のモッツァレラ</em></h3>
+      <p class="feat-body">ピッツァの主役であるモッツァレラチーズには、イタリア・<strong style="color:var(--cream);">ポンティコルボ社</strong>のものを採用しています。<br><br>D.O.P.（原産地名称保護制度）の称号を持ち、美味しさと品質が公的に保証された本物のチーズ。とろけるような濃厚なコクと、ミルクのやさしい甘みがピッツァ全体を際立たせます。</p>
+      <div class="feat-badge">
+        <span class="feat-badge-num" style="font-size:22px;">D.O.P.</span>
+        <span class="feat-badge-text">原産地名称保護制度<br>イタリア公認の品質証明</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- こだわり3: 燃料 -->
+  <div class="feature-block">
+    <div class="feature-img">
+      <img src="images/kiln-oven.jpg" alt="ペレット燃料石窯">
+    </div>
+    <div class="feature-body">
+      <div class="feat-num">03</div>
+      <p class="feat-label">Fuel — 燃料</p>
+      <h3 class="feat-title">木質ペレットが生む<br><em>唯一無二の香ばしさ</em></h3>
+      <p class="feat-body">燃料に<strong style="color:var(--cream);">100%木質ペレット</strong>を使用しています。ガスや電気では決して再現できない、木の燃焼が生み出す遠赤外線と蒸気が食材を包み込み、外はサクッと中はジューシーに仕上げます。<br><br>その薫り高い香ばしさは、一度食べたら忘れられない唯一無二の味。この本物の風味こそ、FELICEのピッツァが選ばれ続ける理由です。</p>
+      <div class="feat-badge">
+        <span class="feat-badge-num">100<span style="font-size:18px;">%</span></span>
+        <span class="feat-badge-text">木質ペレット燃料<br>環境にやさしく、香り豊か</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- こだわり4: 石窯 -->
+  <div class="feature-block reverse">
+    <div class="feature-img">
+      <img src="images/pizza-kiln.jpg" alt="石窯 600度">
+    </div>
+    <div class="feature-body">
+      <div class="feat-num">04</div>
+      <p class="feat-label">Kiln — 石窯</p>
+      <h3 class="feat-title">最高600℃の<br><em>本格石窯で焼き上げる</em></h3>
+      <p class="feat-body">石窯の最高温度は<strong style="color:var(--cream);">600℃</strong>。通常の営業では500℃前後で使用します。これほどの高温で一気に焼き上げることで、生地のサクッとした歯ごたえと、中のもっちり感が同時に実現します。<br><br>約90秒という短時間で焼き上げることで、素材の水分と旨みを逃がさず、外側だけをカリッと香ばしく仕上げる——まさに本格ナポリピッツァの技法です。</p>
+      <div class="feat-badge">
+        <span class="feat-badge-num">600<span style="font-size:20px;">℃</span></span>
+        <span class="feat-badge-text">最高焼成温度<br>通常使用は500℃前後</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- こだわり5: 食材 -->
+  <div class="feature-block">
+    <div class="feature-img">
+      <img src="images/pizza-olive.jpg" alt="厳選食材">
+    </div>
+    <div class="feature-body">
+      <div class="feat-num">05</div>
+      <p class="feat-label">Ingredients — 食材</p>
+      <h3 class="feat-title">国内外から店主が<br><em>直接厳選した素材</em></h3>
+      <p class="feat-body">モッツァレラチーズ以外のトッピングや食材も、<strong style="color:var(--cream);">店主自らが国内外を問わず厳選</strong>したものだけを使用しています。<br><br>イタリア産の本格素材から、地元の新鮮な農産物まで——「美味しい」と確信したものだけを仕入れる姿勢が、キッチンカーの枠を大きく超えたクオリティーを生み出しています。</p>
+    </div>
+  </div>
+
+  <!-- 焼き上げのプロセス -->
+  <section class="section">
+    <div class="wrap">
+      <p class="sec-label">Process</p>
+      <h2 class="sec-title">目の前で完成する、<br><em>ライブ感が魅力。</em></h2>
+      <p class="body-lg" style="margin-bottom:0;">注文を受けてからお客様の目の前で仕上げる——その工程そのものがFELICEの「演出」です。</p>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="tl-num">1</div>
+          <div class="tl-body">
+            <p class="tl-title">生地を <em>手で伸ばす</em></p>
+            <p class="tl-text">数日間低温熟成させた自家製生地を、注文を受けてから手作業で丁寧に伸ばします。この時間帯からすでに香りが漂い、お客様の期待が高まります。</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-num">2</div>
+          <div class="tl-body">
+            <p class="tl-title">こだわりの <em>トッピング</em></p>
+            <p class="tl-text">自家製トマトソースを塗り、D.O.P.認定のモッツァレラチーズと厳選トッピングをのせます。シンプルだからこそ、素材の質が直接味に現れます。</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-num">3</div>
+          <div class="tl-body">
+            <p class="tl-title">500℃の石窯で <em>約90秒</em> 焼き上げ</p>
+            <p class="tl-text">木質ペレット燃料が燃える石窯へ。500℃以上の高温で一気に焼き上げることで、外はサクッと中はとろけるような食感に仕上がります。</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-num">4</div>
+          <div class="tl-body">
+            <p class="tl-title">焼き立てを <em>その場でご提供</em></p>
+            <p class="tl-text">窯から出したてのピッツァをすぐにお客様へ。冷めることなく、最高の状態でお届けするのがキッチンカーならではの醍醐味です。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Quote -->
+<div class="quote-block">
+  <p class="quote-text">FELICEだけしか実現出来ない、<br><em>魅惑の体験</em>を味わってみませんか？</p>
+  <p class="quote-sub">— FELICE Kitchen Car</p>
+</div>
+
+<!-- CTA -->
+<div class="cta">
+  <h2>ご出店の<em>ご依頼・</em><br>お問い合わせ</h2>
+  <p class="cta-sub">イベント・企業催事など、お気軽にご相談ください。</p>
+  <div class="cta-btns">
+    <a href="shutten.html" class="btn-gold">出店プランを見る →</a>
+    <a href="tel:09045944246" class="btn-outline">📞 090-4594-4246</a>
+  </div>
+</div>
+
+<footer>
+  <p class="logo">FELICE</p>
+  <p>© 2024 FELICE Kitchen Car. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
