@@ -7,3 +7,287 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0C0C0C; --bg2: #141414; --bg3: #1C1C1C;
+      --gold: #C9A84C; --gold-light: #E8C97A;
+      --white: #FAFAF7; --muted: rgba(255,255,255,0.45);
+      --border: rgba(255,255,255,0.08);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans JP', sans-serif; font-weight: 300; background: var(--bg); color: var(--white); overflow-x: hidden; }
+
+    /* HEADER */
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 0 48px; background: rgba(12,12,12,0.95); border-bottom: 1px solid var(--border); backdrop-filter: blur(12px); }
+    .header-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 80px; }
+    .logo-text { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; letter-spacing: 6px; color: var(--white); text-decoration: none; }
+    nav { display: flex; gap: 28px; }
+    nav a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px; letter-spacing: .12em; transition: color .2s; }
+    nav a:hover { color: var(--white); }
+    .btn-header { border: 1px solid rgba(201,168,76,.6); color: #C9A84C; font-size: 12px; letter-spacing: .15em; padding: 10px 24px; text-decoration: none; transition: all .2s; }
+    .btn-header:hover { background: rgba(201,168,76,.1); }
+    @media(max-width:768px){ nav { display:none; } header { padding: 0 20px; } }
+
+    /* HERO */
+    .page-hero {
+      padding: 160px 24px 80px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-overline { font-size: 11px; letter-spacing: .3em; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; }
+    .page-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 6vw, 64px); font-weight: 400; letter-spacing: .06em; line-height: 1.1; }
+    .page-title em { font-style: italic; color: var(--gold-light); }
+    .page-desc { font-size: 14px; color: var(--muted); line-height: 1.9; margin-top: 20px; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+    /* MENU GRID */
+    .menu-wrap { max-width: 1200px; margin: 0 auto; padding: 80px 24px 100px; }
+    .menu-section-label {
+      font-size: 11px; letter-spacing: .3em; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 32px;
+      padding-bottom: 12px; border-bottom: 1px solid rgba(201,168,76,.2);
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-bottom: 80px;
+    }
+    .menu-card {
+      background: var(--bg2);
+      overflow: hidden;
+      transition: background .25s;
+      cursor: default;
+    }
+    .menu-card:hover { background: var(--bg3); }
+    .menu-card-img {
+      width: 100%; aspect-ratio: 4/3; object-fit: cover;
+      display: block; filter: brightness(.92);
+      transition: filter .3s, transform .4s;
+    }
+    .menu-card:hover .menu-card-img { filter: brightness(1); transform: scale(1.02); }
+    .menu-card-img-wrap { overflow: hidden; }
+    .menu-card-body { padding: 28px 28px 32px; }
+    .menu-card-tag {
+      display: inline-block; font-size: 9px; letter-spacing: .2em;
+      color: var(--gold); border: 1px solid rgba(201,168,76,.4);
+      padding: 3px 10px; margin-bottom: 14px; text-transform: uppercase;
+    }
+    .menu-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px; font-weight: 400; color: var(--white);
+      margin-bottom: 4px; line-height: 1.2;
+    }
+    .menu-card-name-ja { font-size: 13px; color: var(--muted); margin-bottom: 4px; letter-spacing: .05em; }
+    .menu-card-subtitle { font-size: 11px; color: var(--gold); margin-bottom: 12px; letter-spacing: .05em; font-style: italic; }
+    .menu-card-desc { font-size: 12px; color: rgba(255,255,255,.5); line-height: 1.9; margin-bottom: 20px; }
+
+    /* SIZE */
+    .menu-card-sizes { display: flex; gap: 16px; margin-top: 16px; align-items: baseline; flex-wrap: wrap; }
+    .size-row { display: flex; align-items: baseline; gap: 8px; }
+    .size-label {
+      font-size: 10px; letter-spacing: .2em; color: var(--gold);
+      border: 1px solid rgba(201,168,76,.4); padding: 2px 8px;
+      text-transform: uppercase;
+    }
+    .size-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px; color: var(--gold-light); letter-spacing: .04em;
+    }
+    .size-price-single {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; color: var(--gold-light); letter-spacing: .04em;
+    }
+    .size-price-single span { font-size: 13px; color: var(--muted); margin-left: 4px; }
+
+    /* NOTE */
+    .menu-note {
+      text-align: center; padding: 48px 24px;
+      border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--muted); line-height: 2;
+    }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; }
+    footer p { font-size: 11px; color: var(--muted); letter-spacing: .1em; }
+
+    @media(max-width:900px){ .menu-grid { grid-template-columns: repeat(2,1fr); } }
+    @media(max-width:560px){ .menu-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="felice-kitchen-car.html" class="logo-text">Felice</a>
+    <nav>
+      <a href="felice-kitchen-car.html#about">FELICEについて</a>
+      <a href="felice-kitchen-car.html#schedule">スケジュール</a>
+      <a href="shutten.html">出店依頼</a>
+    </nav>
+    <a href="shutten.html" class="btn-header">出店依頼</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="page-hero">
+  <p class="page-overline">Our Menu</p>
+  <h1 class="page-title">石窯で焼く、<br><em>本物のピッツァ。</em></h1>
+  <p class="page-desc">高温の石窯でひと枚ずつ丁寧に。北海道産小麦を数日間低温発酵させた生地で仕上げる、FELICEこだわりのメニューです。</p>
+</div>
+
+<div class="menu-wrap">
+  <p class="menu-section-label">Pizza Menu</p>
+  <div class="menu-grid">
+
+    <!-- マルゲリータ -->
+    <div class="menu-card">
+      <div class="menu-card-img-wrap">
+        <img class="menu-card-img" src="pizza-margherita.jpg" alt="マルゲリータ">
+      </div>
+      <div class="menu-card-body">
+        <span class="menu-card-tag">Signature</span>
+        <p class="menu-card-name">Margherita</p>
+        <p class="menu-card-name-ja">マルゲリータ</p>
+        <p class="menu-card-desc">トマトソース・モッツァレラ・厳選ミニトマト・グラナパダーノ・バジリコ</p>
+        <div class="menu-card-sizes">
+          <div class="size-row"><span class="size-label">M</span><span class="size-price">¥1,300</span></div>
+          <div class="size-row"><span class="size-label">L</span><span class="size-price">¥1,600</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ジェノベーゼ -->
+    <div class="menu-card">
+      <div class="menu-card-img-wrap">
+        <img class="menu-card-img" src="pizza-genovese.jpg" alt="ジェノベーゼ">
+      </div>
+      <div class="menu-card-body">
+        <span class="menu-card-tag">Popular</span>
+        <p class="menu-card-name">Genovese</p>
+        <p class="menu-card-name-ja">ジェノベーゼ</p>
+        <p class="menu-card-desc">ジェノベーゼソース・モッツァレラ・ゴーダ・グラナパダーノ・バジリコ</p>
+        <div class="menu-card-sizes">
+          <div class="size-row"><span class="size-label">M</span><span class="size-price">¥1,800</span></div>
+          <div class="size-row"><span class="size-label">L</span><span class="size-price">¥2,000</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- クワトロフォルマッジ -->
+    <div class="menu-card">
+      <div class="menu-card-img-wrap">
+        <img class="menu-card-img" src="pizza-quattro.jpg" alt="クワトロフォルマッジ">
+      </div>
+      <div class="menu-card-body">
+        <span class="menu-card-tag">Popular</span>
+        <p class="menu-card-name">Quattro Formaggi</p>
+        <p class="menu-card-name-ja">クワトロフォルマッジ</p>
+        <p class="menu-card-desc">モッツァレラ・エメンタール・パルミジャーノレッジャーノ・ゴルゴンゾーラ</p>
+        <div class="menu-card-sizes">
+          <div class="size-row"><span class="size-label">M</span><span class="size-price">¥2,000</span></div>
+          <div class="size-row"><span class="size-label">L</span><span class="size-price">¥2,500</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- マルゲリータ コン ベーコン -->
+    <div class="menu-card">
+      <div class="menu-card-img-wrap">
+        <img class="menu-card-img" src="pizza-bacon.jpg" alt="マルゲリータ コン ベーコン">
+      </div>
+      <div class="menu-card-body">
+        <span class="menu-card-tag">Recommended</span>
+        <p class="menu-card-name">Margherita con Bacon</p>
+        <p class="menu-card-name-ja">マルゲリータ コン ベーコン</p>
+        <p class="menu-card-desc">トマトソース・モッツァレラ・グラナパダーノ・乾塩ベーコン・厳選ミニトマト・バジリコ</p>
+        <div class="menu-card-sizes">
+          <div class="size-row"><span class="size-label">M</span><span class="size-price">¥1,800</span></div>
+          <div class="size-row"><span class="size-label">L</span><span class="size-price">¥2,200</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ディエゴ -->
+    <div class="menu-card">
+      <div class="menu-card-img-wrap">
+        <img class="menu-card-img" src="pizza-diego.jpg" alt="ディエゴ">
+      </div>
+      <div class="menu-card-body">
+        <span class="menu-card-tag">Chef's Special</span>
+        <p class="menu-card-name">Diego</p>
+        <p class="menu-card-name-ja">ディエゴ</p>
+        <p class="menu-card-subtitle">〜マラドーナが愛したピッツァ〜</p>
+        <p class="menu-card-desc">トマトソース・モッツァレラ・グラナパダーノ・イタリア産ピカンテサラミ・チッポラ（赤玉ねぎ）・バジリコ・イタリア産ツナ</p>
+        <div class="menu-card-sizes">
+          <div class="size-row"><span class="size-label">M</span><span class="size-price">¥1,800</span></div>
+          <div class="size-row"><span class="size-label">L</span><span class="size-price">¥2,400</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- フンギ -->
+    <div class="menu-card">
+      <div class="menu-card-img-wrap">
+        <img class="menu-card-img" src="pizza-funghi.jpg" alt="フンギ">
+      </div>
+      <div class="menu-card-body">
+        <span class="menu-card-tag">Seasonal</span>
+        <p class="menu-card-name">Funghi</p>
+        <p class="menu-card-name-ja">フンギ</p>
+        <p class="menu-card-desc">モッツァレラ・乾塩ベーコン・グラナパダーノ・舞茸・マッシュルーム・ポルチーニ・バター・にんにく</p>
+        <div class="menu-card-sizes">
+          <div class="size-row"><span class="size-label">M</span><span class="size-price">¥1,800</span></div>
+          <div class="size-row"><span class="size-label">L</span><span class="size-price">¥2,200</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- サルモーネ -->
+    <div class="menu-card">
+      <div class="menu-card-img-wrap">
+        <img class="menu-card-img" src="pizza-salmone.jpg" alt="サルモーネ">
+      </div>
+      <div class="menu-card-body">
+        <span class="menu-card-tag">Premium</span>
+        <p class="menu-card-name">Salmone</p>
+        <p class="menu-card-name-ja">サルモーネ</p>
+        <p class="menu-card-desc">自家製ベシャメルソース・スモークサーモン・モッツァレラ・ホウレンソウ・マッシュルーム・ケッパー・グラナパダーノ</p>
+        <div class="menu-card-sizes">
+          <div class="size-row"><span class="size-label">M</span><span class="size-price">¥1,900</span></div>
+          <div class="size-row"><span class="size-label">L</span><span class="size-price">¥2,300</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- プロシュート -->
+    <div class="menu-card">
+      <div class="menu-card-img-wrap">
+        <img class="menu-card-img" src="pizza-prosciutto.jpg" alt="プロシュート エ ルッコラ">
+      </div>
+      <div class="menu-card-body">
+        <span class="menu-card-tag">Premium</span>
+        <p class="menu-card-name">Prosciutto e Rucola</p>
+        <p class="menu-card-name-ja">生ハムとルッコラ 白トリュフオイルがけ</p>
+        <p class="menu-card-desc">トマトソース・モッツァレラ・グラナパダーノ・ルッコラ・ハモンセラーノ・最高級白トリュフオイル</p>
+        <div class="menu-card-sizes">
+          <div class="size-row"><span class="size-label">M</span><span class="size-price">¥2,100</span></div>
+          <div class="size-row"><span class="size-label">L</span><span class="size-price">¥2,500</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="menu-note">
+    <p>※ 価格はすべて税込です。</p>
+    <p>※ 仕入れ状況により、メニューが変更になる場合がございます。</p>
+    <p>※ アレルギーをお持ちの方はスタッフへお申し付けください。</p>
+  </div>
+</div>
+
+<footer>
+  <p>© FELICE KITCHEN CAR</p>
+</footer>
+
+</body>
+</html>
