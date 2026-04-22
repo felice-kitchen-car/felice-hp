@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>独立支援 | FELICE キッチンカー石窯ピッツァ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0C0C0C; --bg2:#111; --bg3:#161616; --bg4:#1a1a1a;
+  --gold:#C9A84C; --gold-light:#E8C97A; --cream:#F5EFE0;
+  --white:#FAFAFA; --muted:rgba(255,255,255,0.45);
+  --border:rgba(255,255,255,0.10);
+}
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--bg); color:var(--white);
+  font-family:'Noto Sans JP', sans-serif; font-weight:300;
+  line-height:1.7; -webkit-font-smoothing:antialiased;
+}
+a { color:inherit; text-decoration:none; }
+img { display:block; width:100%; }
+
+/* Header */
+.page-header {
+  background:rgba(12,12,12,0.97); border-bottom:1px solid var(--border);
+  padding:20px 40px; display:flex; align-items:center;
+  justify-content:space-between; position:sticky; top:0; z-index:100;
+}
+.logo-link {
+  font-family:'Cormorant Garamond',serif; font-size:20px;
+  letter-spacing:0.12em; color:var(--gold); font-weight:500;
+}
+.back-btn {
+  font-size:12px; letter-spacing:0.1em; color:var(--muted);
+  border:1px solid var(--border); padding:8px 18px; border-radius:2px;
+  transition:all 0.2s;
+}
+.back-btn:hover { color:var(--gold); border-color:var(--gold); }
+
+/* Hero */
+.page-hero {
+  position:relative; overflow:hidden;
+  padding:120px 40px 100px; text-align:center;
+}
+.page-hero::before {
+  content:''; position:absolute; inset:0;
+  background:url('images/truck.jpg') center/cover no-repeat;
+  opacity:0.15;
+}
+.page-hero::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(12,12,12,0.7) 0%, var(--bg) 100%);
+}
+.page-hero > * { position:relative; z-index:1; }
+.overline {
+  font-size:11px; letter-spacing:0.28em; color:var(--gold);
+  text-transform:uppercase; margin-bottom:20px;
+}
+.page-hero h1 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(40px,7vw,80px); font-weight:400;
+  color:var(--white); line-height:1.1; margin-bottom:32px;
+}
+.page-hero h1 em { color:var(--gold); font-style:italic; }
+.page-hero .lead {
+  font-size:15px; color:var(--muted); max-width:560px;
+  margin:0 auto 16px; line-height:1.9;
+}
+.hero-badge {
+  display:inline-block; background:rgba(201,168,76,0.12);
+  border:1px solid rgba(201,168,76,0.4); color:var(--gold);
+  font-size:12px; letter-spacing:0.1em; padding:8px 24px;
+  border-radius:2px; margin-top:20px;
+}
+
+/* Sections */
+.wrap { max-width:860px; margin:0 auto; padding:0 40px; }
+section { padding:80px 0; border-bottom:1px solid var(--border); }
+section:last-of-type { border-bottom:none; }
+.section-label {
+  font-size:10px; letter-spacing:0.25em; color:var(--gold);
+  text-transform:uppercase; margin-bottom:12px;
+}
+.section-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(26px,4vw,48px); font-weight:400;
+  color:var(--white); margin-bottom:24px; line-height:1.25;
+}
+.section-title em { color:var(--gold); font-style:italic; }
+.body-text {
+  font-size:14px; color:var(--muted); line-height:2; max-width:680px;
+}
+
+/* Warning box */
+.warning-box {
+  background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.25);
+  border-radius:4px; padding:32px 40px; text-align:center; margin:60px 0;
+}
+.warning-box p {
+  font-size:13px; color:var(--muted); line-height:1.9;
+}
+.warning-box strong { color:var(--gold-light); }
+
+/* Stats grid */
+.stats-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:3px;
+  margin:48px 0;
+}
+.stat-card {
+  background:var(--bg3); padding:32px 20px; text-align:center;
+}
+.stat-num {
+  font-family:'Cormorant Garamond',serif; font-size:48px;
+  color:var(--gold); line-height:1; margin-bottom:8px;
+}
+.stat-label { font-size:12px; color:var(--muted); line-height:1.6; }
+
+/* Skill list */
+.skill-list {
+  display:grid; grid-template-columns:1fr 1fr; gap:3px; margin:32px 0;
+}
+.skill-item {
+  background:var(--bg3); padding:22px 24px;
+  display:flex; gap:14px; align-items:flex-start;
+}
+.skill-icon { color:var(--gold); flex-shrink:0; font-size:16px; }
+.skill-text { font-size:13px; color:var(--muted); line-height:1.75; }
+
+/* Story section */
+.story-body {
+  font-size:14px; color:var(--muted); line-height:2.1;
+  max-width:700px;
+}
+.story-body p { margin-bottom:20px; }
+.story-highlight {
+  font-size:16px; color:var(--cream); font-style:italic;
+  border-left:2px solid var(--gold); padding-left:20px;
+  margin:32px 0; line-height:1.9;
+}
+
+/* Question box */
+.question-box {
+  background:var(--bg3); border:1px solid var(--border);
+  border-radius:6px; padding:48px 40px; text-align:center;
+  margin:48px 0;
+}
+.question-box p {
+  font-size:13px; color:var(--muted); margin-bottom:20px; line-height:1.9;
+}
+.question-box .big-q {
+  font-family:'Cormorant Garamond',serif; font-size:clamp(18px,2.5vw,26px);
+  color:var(--gold-light); line-height:1.5; margin:24px 0;
+}
+
+/* Seminar section */
+.seminar-badge {
+  display:inline-block; background:var(--gold); color:#000;
+  font-size:11px; letter-spacing:0.12em; padding:4px 16px;
+  border-radius:2px; margin-bottom:16px; font-weight:500;
+}
+.seminar-worries {
+  display:grid; grid-template-columns:1fr 1fr; gap:3px;
+  margin:32px 0;
+}
+.worry-item {
+  background:var(--bg3); padding:20px 24px;
+  font-size:13px; color:var(--muted); line-height:1.75;
+  display:flex; gap:12px;
+}
+.worry-item::before {
+  content:'?'; color:var(--gold); font-family:'Cormorant Garamond',serif;
+  font-size:22px; flex-shrink:0; line-height:1;
+}
+
+/* CTA */
+.cta-section {
+  padding:100px 40px; text-align:center;
+}
+.cta-section h2 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(28px,4vw,52px); color:var(--white);
+  margin-bottom:16px; line-height:1.3;
+}
+.cta-section h2 em { color:var(--gold); font-style:italic; }
+.cta-section .sub { font-size:14px; color:var(--muted); margin-bottom:48px; }
+.cta-cards {
+  display:flex; gap:24px; justify-content:center;
+  flex-wrap:wrap; max-width:600px; margin:0 auto;
+}
+.cta-card {
+  flex:1; min-width:220px; background:var(--bg3);
+  border:1px solid var(--border); padding:32px 28px;
+  border-radius:4px; transition:border-color 0.2s;
+}
+.cta-card:hover { border-color:var(--gold); }
+.cta-card h4 { font-size:13px; letter-spacing:0.1em; color:var(--gold); margin-bottom:8px; }
+.cta-card p { font-size:12px; color:var(--muted); margin-bottom:16px; }
+.cta-card .tel { font-family:'Cormorant Garamond',serif; font-size:22px; color:var(--white); letter-spacing:0.05em; }
+.cta-card .arrow { font-size:12px; color:var(--gold); letter-spacing:0.1em; }
+
+/* Responsive */
+@media(max-width:768px){
+  .page-header { padding:16px 20px; }
+  .page-hero { padding:80px 20px 70px; }
+  .wrap { padding:0 20px; }
+  section { padding:60px 0; }
+  .stats-grid { grid-template-columns:1fr; gap:3px; }
+  .skill-list { grid-template-columns:1fr; }
+  .seminar-worries { grid-template-columns:1fr; }
+  .cta-section { padding:70px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="page-header">
+  <a href="felice-kitchen-car.html" class="logo-link">FELICE</a>
+  <a href="felice-kitchen-car.html#independence" class="back-btn">← 戻る</a>
+</header>
+
+<!-- Hero -->
+<div class="page-hero">
+  <p class="overline">Independent Support</p>
+  <h1>キッチンカーで<br><em>独立しませんか。</em></h1>
+  <p class="lead">「キッチンカーを始めたい」「でもノウハウもスキルもない」<br>じゃぁ、そのノウハウやスキルを学べば良い。</p>
+  <p class="lead">本気で成功したい人達の為のFELICE流バックアッププロジェクト。</p>
+  <div class="hero-badge">2022年現在、4名の方の独立を支援してきた実績があります！</div>
+</div>
+
+<main>
+
+  <!-- キャッチ -->
+  <section>
+    <div class="wrap" style="text-align:center;">
+      <h2 style="font-family:'Cormorant Garamond',serif; font-size:clamp(22px,3.5vw,40px); color:var(--white); line-height:1.5; margin-bottom:32px;">
+        会社や他者に頼らず個人で稼ぐ力を身に付け<br>
+        <em style="color:var(--gold); font-style:italic;">私達と一緒に輝かしい未来を手に入れませんか？</em>
+      </h2>
+      <div class="warning-box">
+        <p><strong>※ これより下は本気でキッチンカーで成功したい人だけご覧下さい。</strong><br>
+        それ以外の方は絶対に見ないで下さい。</p>
+      </div>
+      <div style="margin-top:40px; background:var(--bg3); border:1px solid var(--border); border-radius:6px; padding:40px;">
+        <p style="font-size:11px; letter-spacing:0.2em; color:var(--gold); margin-bottom:12px; text-transform:uppercase;">Limited</p>
+        <h3 style="font-family:'Cormorant Garamond',serif; font-size:clamp(22px,3vw,36px); color:var(--white); margin-bottom:16px;">限定１名！！<br><em style="color:var(--gold); font-style:italic;">本気で成功したい人の為の超特化型コンサル</em></h3>
+        <p style="font-size:14px; color:var(--muted); line-height:1.9;">廃業率80%以上の仲間入りをしたくないあなたへ——<br>
+        <span style="font-family:'Cormorant Garamond',serif; font-size:clamp(20px,3vw,32px); color:var(--gold-light); display:block; margin-top:12px;">15,000時間分のノウハウを伝授いたします！</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- キッチンカー経営の実態 -->
+  <section>
+    <div class="wrap">
+      <p class="section-label">Reality</p>
+      <h2 class="section-title">キッチンカー経営は<br><em>「経営・営業・料理」全てのスキルが必要不可欠</em></h2>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num">30<span style="font-size:24px;">%</span></div>
+          <div class="stat-label">1年目の廃業率</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">50<span style="font-size:24px;">%</span></div>
+          <div class="stat-label">2年目の廃業率</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">70<span style="font-size:24px;">%</span></div>
+          <div class="stat-label">3年目の廃業率</div>
+        </div>
+      </div>
+
+      <div class="body-text">
+        <p>飲食店がどれだけ難しい商売なのか、データを見れば一目瞭然です。しかし、そんな厳しい商売にも関わらず新規参入者が後を絶ちません。ここ最近はテイクアウト需要も増加した背景も後押しし、固定の店舗を持つよりリスクを抑えられて始められるキッチンカーが注目を集めています。</p>
+        <p>ですが、固定店舗と同様1年以内の廃業率は30%を超えると言われており、世の中の数ある業種の中でもトップクラスで難しいビジネスに分類されます。それを知ってか知らずか、脱サラして始める方も多く、間違った情報を鵜呑みにして廃業に追い込まれる方も数多くいらっしゃいます。</p>
+        <p>キッチンカーでは全ての業務を自分一人で行なくてはなりません。</p>
+      </div>
+
+      <div class="skill-list">
+        <div class="skill-item"><span class="skill-icon">▸</span><span class="skill-text">日々の営業・仕込み・経理</span></div>
+        <div class="skill-item"><span class="skill-icon">▸</span><span class="skill-text">商品開発・出店場所の確保</span></div>
+        <div class="skill-item"><span class="skill-icon">▸</span><span class="skill-text">現場下見・洗い物・POP作成</span></div>
+        <div class="skill-item"><span class="skill-icon">▸</span><span class="skill-text">SNS運用・ホームページ運用</span></div>
+        <div class="skill-item"><span class="skill-icon">▸</span><span class="skill-text">適正な価格設定・消費者マインドを突いた魅せ方</span></div>
+        <div class="skill-item"><span class="skill-icon">▸</span><span class="skill-text">損益計算書(PL)の付け方・正しい提供価値設計</span></div>
+      </div>
+
+      <div class="question-box">
+        <p>皆さんにここでもう一度質問します。</p>
+        <div class="big-q">群雄割拠、ライバルがひしめき合う飲食市場で<br>たった一人で勝ち抜く自信とスキルは<br>兼ね備えていますか？</div>
+        <p>今一度、自分の胸に手を当てて自問自答してみて下さい。<br>
+        自信を持ってYESと答えられる方は素晴らしいと思います。恐らくどんな困難も乗り越えられると思います。</p>
+        <p style="color:var(--gold-light);">でも、NOと答えた方。<br>早まらず開業する前に一度立ち止まってみて下さい。</p>
+      </div>
+
+      <div class="body-text">
+        <p>私は今でも常にスキルアップを怠りません。少しでも怠けるようなことがあれば、間違いなく廃業するからです。</p>
+        <p>本気でキッチンカーで成功したい、一緒に学んで明るい未来を手に入れたい——廃業確率を少しでも減らして開業したい。そんなバイタリティー溢れる方からの御連絡を心よりお待ちしております。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- なぜ独立支援を始めたのか -->
+  <section>
+    <div class="wrap">
+      <p class="section-label">Our Story</p>
+      <h2 class="section-title">なぜ独立支援を<br><em>始めたのか？</em></h2>
+
+      <div class="story-body">
+        <p>私自身、もともと某FCで開業しました。独立をして自由気ままに営業しておりますが、開業当初は売上も全く振るわずかなり苦労をしました。</p>
+        <p>業者は自分達の利益の追求の為に、開業メリットしかこちらには伝えず、全く知識のない私は、まんまとその口車に乗せられて高いキッチンカーを買わされ、売れない現場を紹介され、開業前に抱いていたイメージとは全くかけ離れた状況に陥ってしまいました。</p>
+        <p>数ヶ月、全く売り上げが立たない状況が続きましたが、このままだと本当に廃業してしまう。子供も生まれたばかりでしたが家族が路頭に迷ってしまう。</p>
+        <div class="story-highlight">窮地に追い込まれ背水の陣の中、FC業者とは縁を切り、周囲にも助けてくれる方はおらず、自分自身で出店場所の開拓や商品開発に注力しました。</div>
+        <p>苦労中、何度もくじけそうになりながらも自らを奮い立てて、何とか営業を続ける事が出来ました。改めて様々なピッツェリアに足を運び実際に食べて商品やメニュー構成を改良し、それと同時に必死に経営スキルを勉強しました。</p>
+        <p>この行動が功を奏し、全くの未経験からここまで営業を続ける事が出来ました。</p>
+        <p style="color:var(--cream);">この地獄のような経験を通して私は思いました。同じような境遇の人を今後二度と創ってはダメだと。</p>
+        <p>これまでに培って来た経験を生かして、これからキッチンカーを始める人の為に、何日でも長く事業が継続出来るようなサポートを築いて行こうと思い、独立支援を始めました。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ピザ焼き体験・開業セミナー -->
+  <section>
+    <div class="wrap">
+      <p class="section-label">Seminar</p>
+      <h2 class="section-title">ピザ焼き体験・<br><em>キッチンカー見学・開業セミナー</em></h2>
+
+      <div style="margin-bottom:16px;">
+        <span class="seminar-badge">只今無料開催中（通常 ¥3,240）</span>
+      </div>
+      <p class="body-text" style="margin-bottom:40px;">弊社では、これからキッチンカー・移動販売を始めたい方向けに開業セミナーを設けております。皆様が抱いている不安を弊社が解消します！</p>
+
+      <div class="seminar-worries">
+        <div class="worry-item">ピザで移動販売を始めたいけど、いきなり始めるのは不安…</div>
+        <div class="worry-item">ピザ窯の購入を考えているが本当に上手く焼けるか心配…</div>
+        <div class="worry-item">漠然とピザを販売したいと思っている方。そもそも美味しいのか？</div>
+        <div class="worry-item">開業資金・売上・運営コストのリアルを知りたい…</div>
+      </div>
+
+      <div style="background:var(--bg3); border:1px solid var(--border); border-radius:6px; padding:40px; margin-top:40px;">
+        <h3 style="font-family:'Cormorant Garamond',serif; font-size:clamp(20px,3vw,32px); color:var(--white); margin-bottom:20px;">セミナーで学べること</h3>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div style="padding:16px; border:1px solid var(--border); border-radius:4px;">
+            <div style="font-size:10px; letter-spacing:0.15em; color:var(--gold); margin-bottom:8px;">01</div>
+            <div style="font-size:13px; color:var(--muted);">実際のキッチンカーを見学・体験できます</div>
+          </div>
+          <div style="padding:16px; border:1px solid var(--border); border-radius:4px;">
+            <div style="font-size:10px; letter-spacing:0.15em; color:var(--gold); margin-bottom:8px;">02</div>
+            <div style="font-size:13px; color:var(--muted);">本格石窯でのピザ焼き体験</div>
+          </div>
+          <div style="padding:16px; border:1px solid var(--border); border-radius:4px;">
+            <div style="font-size:10px; letter-spacing:0.15em; color:var(--gold); margin-bottom:8px;">03</div>
+            <div style="font-size:13px; color:var(--muted);">車両を改造する際の注意点や費用感</div>
+          </div>
+          <div style="padding:16px; border:1px solid var(--border); border-radius:4px;">
+            <div style="font-size:10px; letter-spacing:0.15em; color:var(--gold); margin-bottom:8px;">04</div>
+            <div style="font-size:13px; color:var(--muted);">開業から売上を立てるまでのリアルな話</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="wrap">
+    <h2>まずは<em>お気軽に</em><br>ご連絡ください。</h2>
+    <p class="sub">お電話・メール、どちらでもお気軽にどうぞ。</p>
+    <div class="cta-cards">
+      <a href="tel:09045944246" class="cta-card">
+        <h4>📞 お電話</h4>
+        <p>営業時間内にお受けします。</p>
+        <div class="tel">090-4594-4246</div>
+      </a>
+      <a href="felice-kitchen-car.html#contact" class="cta-card">
+        <h4>✉️ メールフォーム</h4>
+        <p>24時間受付。2営業日以内にご返信いたします。</p>
+        <div class="arrow">フォームへ →</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer style="background:var(--bg2); border-top:1px solid var(--border); padding:32px 40px; text-align:center;">
+  <p style="font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--gold); letter-spacing:0.12em; margin-bottom:12px;">FELICE</p>
+  <p style="font-size:11px; color:var(--muted);">© 2024 FELICE Kitchen Car. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
