@@ -505,46 +505,35 @@
       <p class="section-body">「本物のおいしさを、どこへでも」をモットーに、本格キッチンカーで移動販売しています。さいたま市近郊を中心に、マルシェやイベントへ駆けつけます。</p>
     </div>
 
-    <!-- 動画 + こだわり 2カラム -->
-    <div style="display:grid; grid-template-columns:1.1fr 1fr; gap:64px; align-items:start;">
+    <!-- 動画（全幅・上） -->
+    <div style="position:relative; border-radius:6px; overflow:hidden; background:#000; box-shadow:0 8px 40px rgba(0,0,0,0.6); margin-bottom:48px;">
+      <video
+        controls
+        preload="metadata"
+        poster="images/pizza-truck.jpg"
+        style="width:100%; display:block; max-height:500px; object-fit:cover;"
+      >
+        <source src="images/felice.mp4" type="video/mp4">
+      </video>
+    </div>
 
-      <!-- 左：動画 -->
-      <div style="position:relative; border-radius:6px; overflow:hidden; background:#000; box-shadow:0 8px 40px rgba(0,0,0,0.6);">
-        <video
-          controls
-          preload="metadata"
-          poster="images/pizza-truck.jpg"
-          style="width:100%; display:block; max-height:460px; object-fit:cover;"
-        >
-          <source src="images/felice.mp4" type="video/mp4">
-        </video>
+    <!-- こだわり3項目（横並び） -->
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:32px;">
+      <div style="border-top:1px solid rgba(201,168,76,.3); padding-top:24px;">
+        <div class="pillar-num" style="font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--gold); margin-bottom:12px;">01</div>
+        <h4 style="font-size:14px; font-weight:500; margin-bottom:10px; letter-spacing:1px;">本格ペレットビザ窯</h4>
+        <p style="font-size:13px; color:var(--muted); line-height:1.9; font-weight:300;">ペレット燃焼式の本格窯を搭載。高温で一気に焼き上げる、本物のナポリピザをご提供します。</p>
       </div>
-
-      <!-- 右：こだわり3項目 -->
-      <div class="pillars" style="margin-top:0;">
-        <div class="pillar">
-          <div class="pillar-num">01</div>
-          <div>
-            <h4>本格ペレットビザ窯</h4>
-            <p>ペレット燃焼式の本格窯を搭載。高温で一気に焼き上げる、本物のナポリピザをご提供します。</p>
-          </div>
-        </div>
-        <div class="pillar">
-          <div class="pillar-num">02</div>
-          <div>
-            <h4>こだわり抜いた食材</h4>
-            <p>毎日仕込む手作り生地と厳選素材。シンプルだからこそ、素材の旨みが際立ちます。</p>
-          </div>
-        </div>
-        <div class="pillar">
-          <div class="pillar-num">03</div>
-          <div>
-            <h4>出張・イベント対応</h4>
-            <p>企業イベント、地域のお祭り、マルシェなど、さまざまなシーンに対応します。</p>
-          </div>
-        </div>
+      <div style="border-top:1px solid rgba(201,168,76,.3); padding-top:24px;">
+        <div class="pillar-num" style="font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--gold); margin-bottom:12px;">02</div>
+        <h4 style="font-size:14px; font-weight:500; margin-bottom:10px; letter-spacing:1px;">こだわり抜いた食材</h4>
+        <p style="font-size:13px; color:var(--muted); line-height:1.9; font-weight:300;">毎日仕込む手作り生地と厳選素材。シンプルだからこそ、素材の旨みが際立ちます。</p>
       </div>
-
+      <div style="border-top:1px solid rgba(201,168,76,.3); padding-top:24px;">
+        <div class="pillar-num" style="font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--gold); margin-bottom:12px;">03</div>
+        <h4 style="font-size:14px; font-weight:500; margin-bottom:10px; letter-spacing:1px;">出張・イベント対応</h4>
+        <p style="font-size:13px; color:var(--muted); line-height:1.9; font-weight:300;">企業イベント、地域のお祭り、マルシェなど、さまざまなシーンに対応します。</p>
+      </div>
     </div>
     <!-- こだわり詳細ページへのリンク -->
     <div style="margin-top:56px; text-align:center;">
