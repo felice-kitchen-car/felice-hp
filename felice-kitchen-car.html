@@ -431,7 +431,7 @@
       <a href="tel:09045944246" class="header-tel">090-4594-4246</a>
       <a href="#contact" class="btn-header">出店依頼</a>
     </div>
-    <button class="hamburger" onclick="toggleMenu()" aria-label="メニュー">
+    <button class="hamburger" id="menuBtn" aria-label="メニュー">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -709,6 +709,10 @@ if (hdr) {
 }
 
 // ---- モバイルメニュー ----
+function toggleMenu() {
+  var nav = document.getElementById('mobileNav');
+  if (nav) nav.classList.toggle('open');
+}
 var menuBtn   = document.getElementById('menuBtn');
 var mobileNav = document.querySelector('.mobile-nav');
 var closeBtn  = document.getElementById('closeNav');
