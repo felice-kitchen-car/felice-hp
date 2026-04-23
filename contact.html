@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お問い合わせ | FELICE キッチンカー石窯ピッツァ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0C0C0C; --bg2: #111; --bg3: #161616;
+      --gold: #C9A84C; --gold-light: #E2C97E;
+      --white: #F5F0E8; --cream: #E8DCC8; --muted: rgba(245,240,232,0.5);
+      --border: rgba(255,255,255,0.08);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 300; background: var(--bg); color: var(--white);
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      padding: 0 48px; height: 72px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(12,12,12,0.95);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+    .logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; font-weight: 600; letter-spacing: 6px;
+      color: var(--white); text-decoration: none; text-transform: uppercase;
+    }
+    .back-link {
+      font-size: 12px; letter-spacing: .1em; color: var(--muted);
+      text-decoration: none; border: 1px solid var(--border);
+      padding: 8px 20px; border-radius: 2px; transition: all .2s;
+    }
+    .back-link:hover { color: var(--white); border-color: var(--gold); }
+
+    /* HERO */
+    .hero {
+      padding: 160px 48px 80px;
+      text-align: center;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+    }
+    .overline {
+      font-size: 10px; letter-spacing: .3em; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 20px; display: block;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 60px); font-weight: 400;
+      color: var(--white); line-height: 1.2; margin-bottom: 16px;
+    }
+    .hero h1 em { font-style: italic; color: var(--gold); }
+    .hero p {
+      font-size: 14px; color: var(--muted); line-height: 2; font-weight: 300;
+    }
+
+    /* FORM SECTION */
+    .form-section {
+      max-width: 760px; margin: 0 auto; padding: 80px 32px 120px;
+    }
+
+    /* FORM STYLES */
+    .form-group { margin-bottom: 32px; }
+    .form-group label {
+      display: block; font-size: 11px; letter-spacing: .2em;
+      color: var(--gold); text-transform: uppercase; margin-bottom: 10px;
+    }
+    .form-group .required {
+      color: var(--gold-light); margin-left: 4px; font-size: 10px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%; background: var(--bg2);
+      border: 1px solid var(--border); border-radius: 2px;
+      color: var(--white); font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 300; font-size: 14px;
+      padding: 14px 18px; outline: none;
+      transition: border-color .2s;
+      -webkit-appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--gold); }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(245,240,232,0.25); }
+    .form-group select option { background: var(--bg2); }
+    .form-group textarea { resize: vertical; min-height: 140px; line-height: 1.8; }
+
+    .form-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    }
+
+    .divider {
+      border: none; border-top: 1px solid var(--border);
+      margin: 40px 0;
+    }
+
+    .section-label {
+      font-size: 10px; letter-spacing: .3em; color: var(--muted);
+      text-transform: uppercase; margin-bottom: 28px; display: block;
+    }
+
+    /* SUBMIT */
+    .submit-area { text-align: center; margin-top: 48px; }
+    .btn-submit {
+      display: inline-block; background: var(--gold); color: #000;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 13px; font-weight: 500; letter-spacing: .18em;
+      padding: 18px 64px; border-radius: 2px; border: none;
+      cursor: pointer; transition: background .2s; text-transform: uppercase;
+    }
+    .btn-submit:hover { background: var(--gold-light); }
+    .submit-note {
+      font-size: 12px; color: var(--muted); margin-top: 16px; line-height: 1.8;
+    }
+
+    /* SUCCESS MESSAGE */
+    .success-msg {
+      display: none; text-align: center; padding: 60px 32px;
+      border: 1px solid rgba(201,168,76,.3); border-radius: 4px;
+      background: rgba(201,168,76,.04);
+    }
+    .success-msg .checkmark { font-size: 48px; margin-bottom: 24px; display: block; }
+    .success-msg h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; font-weight: 400; color: var(--gold); margin-bottom: 12px;
+    }
+    .success-msg p { font-size: 14px; color: var(--muted); line-height: 1.9; }
+
+    /* FOOTER */
+    footer {
+      background: #080808; border-top: 1px solid var(--border);
+      padding: 40px 48px; text-align: center;
+    }
+    footer p { font-size: 12px; color: rgba(255,255,255,0.2); }
+
+    /* MOBILE */
+    @media (max-width: 680px) {
+      header { padding: 0 20px; height: 64px; }
+      .logo-text { font-size: 22px; }
+      .back-link { font-size: 11px; padding: 7px 14px; }
+      .hero { padding: 120px 24px 60px; }
+      .form-section { padding: 48px 20px 80px; }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+      footer { padding: 32px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="felice-kitchen-car.html" class="logo-text">Felice</a>
+  <a href="felice-kitchen-car.html" class="back-link">← トップに戻る</a>
+</header>
+
+<div class="hero">
+  <span class="overline">Contact</span>
+  <h1>お問い合わせ・<br><em>出店ご依頼</em></h1>
+  <p>イベント出店・買取プラン・ピザ焼き体験など、<br>お気軽にご相談ください。2営業日以内にご返信します。</p>
+</div>
+
+<div class="form-section">
+  <form id="contactForm" action="https://formspree.io/f/xwpbqodp" method="POST">
+
+    <!-- お客様情報 -->
+    <span class="section-label">お客様情報</span>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>お名前 <span class="required">*必須</span></label>
+        <input type="text" name="name" placeholder="山田 太郎" required>
+      </div>
+      <div class="form-group">
+        <label>会社名・団体名</label>
+        <input type="text" name="company" placeholder="○○株式会社（任意）">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>メールアドレス <span class="required">*必須</span></label>
+        <input type="email" name="email" placeholder="example@email.com" required>
+      </div>
+      <div class="form-group">
+        <label>電話番号</label>
+        <input type="tel" name="phone" placeholder="090-0000-0000">
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 出店情報 -->
+    <span class="section-label">出店について</span>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>ご希望のプラン</label>
+        <select name="plan">
+          <option value="">選択してください</option>
+          <option value="kaitori">買取プラン（¥50,000〜）</option>
+          <option value="taiken">ピザ焼き体験（¥3,000/人）</option>
+          <option value="tsujyo">通常出店（要相談）</option>
+          <option value="other">その他・未定</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>出店希望日</label>
+        <input type="date" name="date">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>開催場所（都道府県）</label>
+        <input type="text" name="location" placeholder="埼玉県さいたま市">
+      </div>
+      <div class="form-group">
+        <label>予想来場者数</label>
+        <select name="guests">
+          <option value="">選択してください</option>
+          <option value="~50">〜50人</option>
+          <option value="50~100">50〜100人</option>
+          <option value="100~200">100〜200人</option>
+          <option value="200~">200人以上</option>
+          <option value="unknown">未定</option>
+        </select>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- メッセージ -->
+    <span class="section-label">ご要望・メッセージ</span>
+
+    <div class="form-group">
+      <label>詳細・ご質問など</label>
+      <textarea name="message" placeholder="イベントの詳細、ご要望、ご不明な点などをお気軽にお書きください。"></textarea>
+    </div>
+
+    <!-- 送信 -->
+    <div class="submit-area">
+      <button type="submit" class="btn-submit">送信する</button>
+      <p class="submit-note">
+        送信後、確認メールをお送りします。<br>
+        お急ぎの場合は <a href="tel:09045944246" style="color:var(--gold);">090-4594-4246</a> までお電話ください。
+      </p>
+    </div>
+
+  </form>
+
+  <!-- 送信完了メッセージ -->
+  <div class="success-msg" id="successMsg">
+    <span class="checkmark">✓</span>
+    <h3>送信完了しました</h3>
+    <p>お問い合わせありがとうございます。<br>2営業日以内にご返信いたします。<br>お急ぎの場合は <a href="tel:09045944246" style="color:var(--gold);">090-4594-4246</a> までご連絡ください。</p>
+  </div>
+</div>
+
+<footer>
+  <p>© 2024 FELICE Kitchen Car. All rights reserved.</p>
+</footer>
+
+<script>
+  // Formspree AJAX送信
+  var form = document.getElementById('contactForm');
+  var successMsg = document.getElementById('successMsg');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var data = new FormData(form);
+      fetch(form.action, {
+        method: 'POST', body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(function(res) {
+        if (res.ok) {
+          form.style.display = 'none';
+          successMsg.style.display = 'block';
+        } else {
+          alert('送信に失敗しました。お電話でお問い合わせください。');
+        }
+      }).catch(function() {
+        alert('送信に失敗しました。お電話でお問い合わせください。');
+      });
+    });
+  }
+</script>
+
+</body>
+</html>
