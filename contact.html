@@ -171,7 +171,10 @@
 </div>
 
 <div class="form-section">
-  <form id="contactForm" action="https://formspree.io/f/xwpbqodp" method="POST">
+  <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+    <input type="hidden" name="access_key" value="d5254ba7-bee4-48a2-a21e-0875aff2359f">
+    <input type="hidden" name="subject" value="【FELICE】お問い合わせが届きました">
+    <input type="hidden" name="from_name" value="FELICE お問い合わせフォーム">
 
     <!-- お客様情報 -->
     <span class="section-label">お客様情報</span>
@@ -279,7 +282,7 @@
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       var data = new FormData(form);
-      fetch(form.action, {
+      fetch('https://api.web3forms.com/submit', {
         method: 'POST', body: data,
         headers: { 'Accept': 'application/json' }
       }).then(function(res) {
