@@ -1,10 +1,40 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QQC9EKWSHG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-QQC9EKWSHG');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>出店スケジュール | FELICE（フェリーチェ）さいたま市 ピザキッチンカー</title>
-  <meta name="description" content="FELICEの出店スケジュール一覧。さいたま市・大宮・浦和・埼玉県内各地へのピザキッチンカー出店情報。マルシェ・イベント出店日程を掲載中。">
+  <title>出店スケジュール | FELICE キッチンカー石窯ピッツァ</title>
+  <meta name="description" content="FELICEキッチンカーの最新出店スケジュール。さいたま市など埼玉・関東圏のマルシェ・イベントへの出店日程を掲載中。本格石窯ナポリピザを焼きたてでお届けします。">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://felice-foodtruck.com/schedule.html">
+  <!-- OGP -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="出店スケジュール | FELICE キッチンカー石窯ピッツァ">
+  <meta property="og:description" content="FELICEキッチンカーの最新出店スケジュール。さいたま市など埼玉・関東圏のマルシェ・イベントへの出店日程を掲載中。">
+  <meta property="og:url" content="https://felice-foodtruck.com/schedule.html">
+  <meta property="og:site_name" content="FELICE キッチンカー石窯ピッツァ">
+  <meta property="og:image" content="https://felice-foodtruck.com/images/pizza-margherita.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://felice-foodtruck.com/"},
+      {"@type": "ListItem", "position": 2, "name": "出店スケジュール", "item": "https://felice-foodtruck.com/schedule.html"}
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
@@ -17,6 +47,8 @@
     }
     html { scroll-behavior: smooth; }
     body { font-family: 'Noto Sans JP', sans-serif; font-weight: 300; background: var(--bg); color: var(--white); overflow-x: hidden; }
+
+    /* HEADER */
     header { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 0 48px; background: rgba(12,12,12,0.95); border-bottom: 1px solid var(--border); backdrop-filter: blur(12px); }
     .header-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 80px; }
     .logo-text { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; letter-spacing: 6px; color: var(--white); text-decoration: none; }
@@ -26,12 +58,25 @@
     .btn-header { border: 1px solid rgba(201,168,76,.6); color: #C9A84C; font-size: 12px; letter-spacing: .15em; padding: 10px 24px; text-decoration: none; transition: all .2s; }
     .btn-header:hover { background: rgba(201,168,76,.1); }
     @media(max-width:768px){ nav { display:none; } header { padding: 0 20px; } }
+
+    /* MAIN */
     .page-wrap { max-width: 900px; margin: 0 auto; padding: 120px 24px 80px; }
     .page-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px,5vw,44px); font-weight: 400; letter-spacing: .1em; color: var(--white); margin-bottom: 8px; }
     .page-sub { font-size: 12px; letter-spacing: .2em; color: var(--gold); text-transform: uppercase; margin-bottom: 48px; }
+
+    /* 月区切り */
     .month-block { margin-bottom: 48px; }
     .month-label { font-family: 'Cormorant Garamond', serif; font-size: 22px; letter-spacing: .15em; color: var(--gold); border-bottom: 1px solid rgba(201,168,76,.25); padding-bottom: 10px; margin-bottom: 4px; }
-    .event-row { display: grid; grid-template-columns: 90px 1fr auto; gap: 0; border-bottom: 1px solid var(--border); padding: 18px 0; align-items: center; }
+
+    /* イベント行 */
+    .event-row {
+      display: grid;
+      grid-template-columns: 90px 1fr auto;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+      align-items: center;
+    }
     .event-row:hover { background: rgba(255,255,255,.02); }
     .ev-date { display:flex; flex-direction:column; }
     .ev-date .day { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: var(--white); line-height: 1; }
@@ -43,115 +88,167 @@
     .ev-name { font-size: 15px; color: var(--white); margin-bottom: 4px; line-height: 1.4; }
     .ev-loc  { font-size: 12px; color: var(--muted); }
     .ev-time { font-size: 12px; color: rgba(201,168,76,.8); white-space: nowrap; text-align: right; }
-    .info-section { margin-bottom: 40px; }
-    .info-section-label { font-size: 11px; letter-spacing: .2em; color: var(--muted); text-transform: uppercase; margin-bottom: 12px; }
-    .info-banner { display: flex; align-items: flex-start; gap: 14px; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.35); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
-    .info-banner-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
-    .info-banner-label { font-size: 10px; letter-spacing: .2em; color: var(--gold); margin-bottom: 4px; }
-    .info-banner-text { font-size: 14px; color: var(--white); line-height: 1.6; }
-    .schedule-section-label { font-size: 11px; letter-spacing: .2em; color: var(--muted); text-transform: uppercase; margin-bottom: 16px; }
+
+    /* ローディング・空 */
     .loading { text-align:center; color:var(--muted); padding: 60px 0; font-size:14px; }
+
+    /* FOOTER */
     footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; }
     footer p { font-size: 11px; color: var(--muted); letter-spacing: .1em; }
+
     @media(max-width:600px){
       .event-row { grid-template-columns: 72px 1fr; }
       .ev-time { display:none; }
       .ev-date .day { font-size: 26px; }
-      .info-banner { padding: 12px 14px; gap: 10px; }
-      .info-banner-text { font-size: 13px; }
     }
   </style>
 </head>
 <body>
+
 <header>
   <div class="header-inner">
-    <a href="felice-kitchen-car.html" class="logo-text">Felice</a>
+    <a href="index.html" class="logo-text">Felice</a>
     <nav>
-      <a href="felice-kitchen-car.html#menu">メニュー</a>
-      <a href="felice-kitchen-car.html#about">FELICEについて</a>
+      <a href="index.html#menu">メニュー</a>
+      <a href="index.html#about">FELICEについて</a>
       <a href="shutten.html">出店依頼</a>
     </nav>
     <a href="shutten.html" class="btn-header">出店依頼</a>
   </div>
 </header>
+
 <div class="page-wrap">
   <p class="page-sub">Schedule</p>
   <h1 class="page-title">出店スケジュール</h1>
+
   <div id="scheduleRoot"><p class="loading">読み込み中...</p></div>
 </div>
+
 <footer>
   <p>© FELICE KITCHEN CAR</p>
 </footer>
+
 <script>
 (function(){
   var GCAL_KEY = 'AIzaSyCAIFXUThYs_nnz002j9Id70XBQ6H3P8Lk';
   var GCAL_ID  = 'e5ac2f1a6abfd1d0c52d026a9911ca98408ae7a642b6f26eedb7203478996e10@group.calendar.google.com';
   var WD  = ['日','月','火','水','木','金','土'];
   var MON_JA = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
-  function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  function escHtml(s){
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
   function pad(n){ return ('0'+n).slice(-2); }
+
   var now = new Date();
+  // 6か月先まで取得
   var sixMonths = new Date(now.getTime() + 180 * 24 * 60 * 60 * 1000);
+
   var gcalUrl = 'https://www.googleapis.com/calendar/v3/calendars/'
               + encodeURIComponent(GCAL_ID)
               + '/events?key=' + GCAL_KEY
               + '&timeMin=' + encodeURIComponent(now.toISOString())
               + '&timeMax=' + encodeURIComponent(sixMonths.toISOString())
               + '&singleEvents=true&orderBy=startTime&maxResults=200';
+
   fetch(gcalUrl)
     .then(function(r){ return r.json(); })
     .then(function(gcal){
       var events = (gcal.items || []).map(function(item){
-        var rawSummary = item.summary || '';
         var dateStr = item.start.date ? item.start.date : item.start.dateTime.slice(0,10);
         var timeStr = '';
         if (item.start.dateTime && item.end && item.end.dateTime) {
           var s = new Date(item.start.dateTime);
           var e = new Date(item.end.dateTime);
-          timeStr = pad(s.getHours()) + ':' + pad(s.getMinutes()) + '〜' + pad(e.getHours()) + ':' + pad(e.getMinutes());
+          timeStr = pad(s.getHours()) + ':' + pad(s.getMinutes())
+                  + '〜' + pad(e.getHours()) + ':' + pad(e.getMinutes());
         }
-        var name = rawSummary.replace(/^【[^】]*】s*/, '');
-        var isInfo = rawSummary.indexOf('インフォメーション') !== -1
-                  || rawSummary.indexOf('📢') !== -1
-                  || rawSummary.indexOf('お知らせ') !== -1;
-        return { date: dateStr, name: name, rawSummary: rawSummary, location: item.location || '', time: timeStr, description: item.description || '', isInfo: isInfo };
+        var name = (item.summary || '').replace(/^【[^】]*】\s*/, '');
+        return { date: dateStr, name: name, location: item.location || '', time: timeStr };
       }).sort(function(a,b){ return a.date < b.date ? -1 : 1; });
-      var infoEvents = events.filter(function(ev){ return ev.isInfo; });
-      var regularEvents = events.filter(function(ev){ return !ev.isInfo; });
-      var html = '';
-      if (infoEvents.length > 0) {
-        html += '<div class="info-section"><p class="info-section-label">Information</p>';
-        infoEvents.forEach(function(ev){
-          var text = ev.description ? ev.description : ev.name;
-          html += '<div class="info-banner"><span class="info-banner-icon">&#128226;</span><div class="info-banner-body"><p class="info-banner-label">お知らせ</p><p class="info-banner-text">' + escHtml(text) + '</p></div></div>';
-        });
-        html += '</div>';
-      }
-      if (regularEvents.length === 0) {
-        html += '<p class="loading">現在スケジュールはありません。</p>';
-        document.getElementById('scheduleRoot').innerHTML = html;
+
+      if (events.length === 0) {
+        document.getElementById('scheduleRoot').innerHTML =
+          '<p class="loading">現在スケジュールはありません。</p>';
         return;
       }
-      html += '<p class="schedule-section-label">Schedule</p>';
+
+      // 月ごとにグループ化
       var months = {};
-      regularEvents.forEach(function(ev){ var key = ev.date.slice(0,7); if (!months[key]) months[key] = []; months[key].push(ev); });
+      events.forEach(function(ev){
+        var key = ev.date.slice(0,7); // YYYY-MM
+        if (!months[key]) months[key] = [];
+        months[key].push(ev);
+      });
+
+      var html = '';
       Object.keys(months).sort().forEach(function(key){
         var yr = parseInt(key.slice(0,4));
         var mo = parseInt(key.slice(5,7)) - 1;
-        html += '<div class="month-block"><p class="month-label">' + yr + '年 ' + MON_JA[mo] + '</p>';
+        html += '<div class="month-block">';
+        html += '<p class="month-label">' + yr + '年 ' + MON_JA[mo] + '</p>';
         months[key].forEach(function(ev){
-          var d = new Date(ev.date + 'T00:00:00');
-          var day = d.getDate(); var wd = d.getDay();
+          var d   = new Date(ev.date + 'T00:00:00');
+          var day = d.getDate();
+          var wd  = d.getDay();
+          var wdLabel = WD[wd];
           var wdClass = wd === 0 ? 'sun' : wd === 6 ? 'sat' : 'wkd';
-          html += '<div class="event-row"><div class="ev-date"><span class="day">' + pad(day) + '</span><span class="wd ' + wdClass + '">(' + WD[wd] + ')</span></div>';
-          html += '<div class="ev-info"><p class="ev-name">' + escHtml(ev.name) + '</p>' + (ev.location ? '<p class="ev-loc">&#128205; ' + escHtml(ev.location) + '</p>' : '') + '</div>';
-          html += '<div class="ev-time">' + escHtml(ev.time) + '</div></div>';
+          html += '<div class="event-row">';
+          html += '<div class="ev-date">'
+                + '<span class="day">' + pad(day) + '</span>'
+                + '<span class="wd ' + wdClass + '">(' + wdLabel + ')</span>'
+                + '</div>';
+          html += '<div class="ev-info">'
+                + '<p class="ev-name">' + escHtml(ev.name) + '</p>'
+                + (ev.location ? '<p class="ev-loc">&#128205; <a href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(ev.location) + '" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">' + escHtml(ev.location) + '</a></p>' : '')
+                + '</div>';
+          html += '<div class="ev-time">' + escHtml(ev.time) + '</div>';
+          html += '</div>';
         });
         html += '</div>';
       });
+
       document.getElementById('scheduleRoot').innerHTML = html;
+
+      // 検索エンジン向け：出店予定をイベント構造化データとして埋め込む
+      try {
+        var ldEvents = events.map(function(ev){
+          var ld = {
+            "@context": "https://schema.org",
+            "@type": "Event",
+            "name": "FELICE キッチンカー出店：" + ev.name,
+            "startDate": ev.date,
+            "eventStatus": "https://schema.org/EventScheduled",
+            "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+            "image": "https://felice-foodtruck.com/images/pizza-margherita.jpg",
+            "description": "本格石窯ナポリピザのキッチンカー FELICE が「" + ev.name + "」に出店します。",
+            "organizer": {
+              "@type": "Organization",
+              "name": "FELICE キッチンカー石窯ピッツァ",
+              "url": "https://felice-foodtruck.com"
+            }
+          };
+          if (ev.time) {
+            var t = ev.time.split('〜');
+            if (t[0]) ld.startDate = ev.date + 'T' + t[0] + ':00+09:00';
+            if (t[1]) ld.endDate = ev.date + 'T' + t[1] + ':00+09:00';
+          }
+          if (ev.location) {
+            ld.location = { "@type": "Place", "name": ev.location, "address": ev.location };
+          }
+          return ld;
+        });
+        var ldTag = document.createElement('script');
+        ldTag.type = 'application/ld+json';
+        ldTag.text = JSON.stringify(ldEvents);
+        document.head.appendChild(ldTag);
+      } catch(e) {}
     })
-    .catch(function(e){ document.getElementById('scheduleRoot').innerHTML = '<p class="loading">スケジュールの取得に失敗しました。</p>'; });
+    .catch(function(e){
+      document.getElementById('scheduleRoot').innerHTML =
+        '<p class="loading">スケジュールの取得に失敗しました。</p>';
+    });
 })();
 </script>
 </body>
