@@ -89,29 +89,6 @@
     .ev-loc  { font-size: 12px; color: var(--muted); }
     .ev-time { font-size: 12px; color: rgba(201,168,76,.8); white-space: nowrap; text-align: right; }
 
-    
-    /* 今日の出店ハイライト */
-    .event-row.today {
-      background: rgba(201,168,76,0.07);
-      border-left: 3px solid #C9A84C;
-      padding-left: 14px;
-      margin-left: -3px;
-    }
-    .event-row.today .ev-date .day { color: #C9A84C; }
-    .today-badge {
-      display: inline-block;
-      font-size: 9px;
-      letter-spacing: .15em;
-      color: #C9A84C;
-      background: rgba(201,168,76,0.15);
-      border: 1px solid rgba(201,168,76,0.35);
-      padding: 2px 8px;
-      border-radius: 2px;
-      margin-left: 8px;
-      vertical-align: middle;
-      font-family: sans-serif;
-    }
-
     /* ローディング・空 */
     .loading { text-align:center; color:var(--muted); padding: 60px 0; font-size:14px; }
 
@@ -165,7 +142,6 @@
   function pad(n){ return ('0'+n).slice(-2); }
 
   var now = new Date();
-  var todayStr = now.getFullYear() + '-' + pad(now.getMonth()+1) + '-' + pad(now.getDate());
   // 6か月先まで取得
   var sixMonths = new Date(now.getTime() + 180 * 24 * 60 * 60 * 1000);
 
@@ -218,14 +194,13 @@
           var wd  = d.getDay();
           var wdLabel = WD[wd];
           var wdClass = wd === 0 ? 'sun' : wd === 6 ? 'sat' : 'wkd';
-          var isToday = ev.date === todayStr;
-          html += '<div class="event-row' + (isToday ? ' today' : '') + '">';
+          html += '<div class="event-row">';
           html += '<div class="ev-date">'
                 + '<span class="day">' + pad(day) + '</span>'
                 + '<span class="wd ' + wdClass + '">(' + wdLabel + ')</span>'
                 + '</div>';
           html += '<div class="ev-info">'
-                + '<p class="ev-name">' + escHtml(ev.name) + (isToday ? '<span class="today-badge">TODAY</span>' : '') + '</p>'
+                + '<p class="ev-name">' + escHtml(ev.name) + '</p>'
                 + (ev.location ? '<p class="ev-loc">&#128205; <a href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(ev.location) + '" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">' + escHtml(ev.location) + '</a></p>' : '')
                 + '</div>';
           html += '<div class="ev-time">' + escHtml(ev.time) + '</div>';
@@ -237,8 +212,9 @@
       document.getElementById('scheduleRoot').innerHTML = html;
 
       // 検索エンジン向け：出店予定をイベント構造化データとして埋め込む
+      // ※場所が入っている予定だけを対象にする（場所なしはGoogleでエラーになるため）
       try {
-        var ldEvents = events.map(function(ev){
+        var ldEvents = events.filter(function(ev){ return ev.location; }).map(function(ev){
           var ld = {
             "@context": "https://schema.org",
             "@type": "Event",
@@ -259,9 +235,7 @@
             if (t[0]) ld.startDate = ev.date + 'T' + t[0] + ':00+09:00';
             if (t[1]) ld.endDate = ev.date + 'T' + t[1] + ':00+09:00';
           }
-          if (ev.location) {
-            ld.location = { "@type": "Place", "name": ev.location, "address": ev.location };
-          }
+          ld.location = { "@type": "Place", "name": ev.location, "address": ev.location };
           return ld;
         });
         var ldTag = document.createElement('script');
