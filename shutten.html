@@ -151,6 +151,23 @@ img{display:block;width:100%;}
 .plan-desc{font-size:14px;color:var(--muted);line-height:1.9;}
 .plan-card-right{padding:44px 48px;}
 
+/* プラン比較カード（Plan01内） */
+.plan-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.plan-card-cmp{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:22px 20px;display:flex;flex-direction:column;}
+.plan-card-cmp.featured{background:rgba(201,168,76,0.10);border:2px solid var(--gold);}
+.plan-card-cmp .recommend-badge{display:inline-block;background:var(--gold);color:#000;font-size:10px;letter-spacing:0.1em;padding:3px 10px;border-radius:3px;margin-bottom:10px;font-weight:700;align-self:flex-start;}
+.pcc-tier{font-size:15px;letter-spacing:0.03em;color:var(--cream);margin-bottom:12px;font-weight:500;}
+.plan-card-cmp.featured .pcc-tier{color:var(--gold);}
+.pcc-price{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--white);font-weight:600;line-height:1.1;}
+.plan-card-cmp.featured .pcc-price{color:var(--gold);}
+.pcc-unit{font-size:12px;color:var(--muted);margin-top:4px;}
+.pcc-list{margin:14px 0;padding:14px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.pcc-row{padding:7px 0;}
+.pcc-row+.pcc-row{border-top:1px solid rgba(255,255,255,0.06);}
+.pcc-label{display:block;font-size:11px;letter-spacing:0.05em;color:var(--muted);margin-bottom:3px;}
+.pcc-value{display:block;font-size:14px;color:var(--cream);font-weight:500;}
+.pcc-for{font-size:13px;color:var(--cream);line-height:1.7;margin-top:12px;}
+
 /* Price badge */
 .price-badge{
   display:inline-flex;align-items:baseline;gap:6px;
@@ -276,6 +293,13 @@ footer p{font-size:11px;color:var(--muted);}
   .trust-block{padding:44px 28px;}
   .plan-card{grid-template-columns:1fr;}
   .plan-card-left{border-right:none;border-bottom:1px solid var(--border);}
+  .plan-cards{grid-template-columns:1fr;gap:14px;}
+  .pcc-tier{font-size:18px;}
+  .pcc-price{font-size:34px;}
+  .pcc-unit{font-size:13px;}
+  .pcc-label{font-size:13px;}
+  .pcc-value{font-size:16px;}
+  .pcc-for{font-size:14px;}
   .guarantee{padding:44px 28px;}
   .guarantee-grid{grid-template-columns:1fr;gap:32px;}
   .faq-body-inner{padding-left:36px;}
@@ -415,32 +439,33 @@ footer p{font-size:11px;color:var(--muted);}
             <a href="kaitori-plan.html" style="display:inline-block;margin-top:28px;font-size:11px;letter-spacing:.14em;color:var(--gold);border:1px solid rgba(201,168,76,.4);padding:11px 22px;border-radius:2px;">詳細ページへ →</a>
           </div>
           <div class="plan-card-right">
-            <table class="plan-table">
-              <tr>
-                <th>プラン</th>
-                <th>料金（税抜）</th>
-                <th>メニュー</th>
-                <th>こんな方に</th>
-              </tr>
-              <tr>
-                <td>ベーシック（Sサイズ）</td>
-                <td>¥50,000<br><small style="color:var(--muted);font-size:12px;">（50枚）</small></td>
-                <td>1種類</td>
-                <td>お手頃にイベントを盛り上げたい方</td>
-              </tr>
-              <tr class="pop" style="background:rgba(201,168,76,.05);">
-                <td style="color:var(--gold);">スタンダード（Sサイズ）</td>
-                <td style="color:var(--gold);">¥60,000<br><small style="color:var(--muted);font-size:12px;">（50枚）</small></td>
-                <td>2種類</td>
-                <td>中規模イベントを開催される方</td>
-              </tr>
-              <tr>
-                <td>プレミアム（Mサイズ）</td>
-                <td>¥80,000<br><small style="color:var(--muted);font-size:12px;">（50枚）</small></td>
-                <td>4種類</td>
-                <td>選べる楽しさで満足度を最大化したい方</td>
-              </tr>
-            </table>
+            <div class="plan-cards">
+              <div class="plan-card-cmp">
+                <p class="pcc-tier">ベーシック（Sサイズ）</p>
+                <p class="pcc-price">¥50,000<span class="pcc-unit">（50枚）</span></p>
+                <div class="pcc-list">
+                  <div class="pcc-row"><span class="pcc-label">メニュー</span><span class="pcc-value">1種類</span></div>
+                </div>
+                <p class="pcc-for">お手頃にイベントを盛り上げたい方</p>
+              </div>
+              <div class="plan-card-cmp featured">
+                <span class="recommend-badge">POPULAR</span>
+                <p class="pcc-tier">スタンダード（Sサイズ）</p>
+                <p class="pcc-price">¥60,000<span class="pcc-unit">（50枚）</span></p>
+                <div class="pcc-list">
+                  <div class="pcc-row"><span class="pcc-label">メニュー</span><span class="pcc-value">2種類</span></div>
+                </div>
+                <p class="pcc-for">中規模イベントを開催される方</p>
+              </div>
+              <div class="plan-card-cmp">
+                <p class="pcc-tier">プレミアム（Mサイズ）</p>
+                <p class="pcc-price">¥80,000<span class="pcc-unit">（50枚）</span></p>
+                <div class="pcc-list">
+                  <div class="pcc-row"><span class="pcc-label">メニュー</span><span class="pcc-value">4種類</span></div>
+                </div>
+                <p class="pcc-for">選べる楽しさで満足度を最大化したい方</p>
+              </div>
+            </div>
             <div class="plan-note">
               <strong>計算例（50食の場合）：</strong> ピザ50食 ¥50,000 ＋ 出張料 ¥5,000 ＝ <strong style="color:var(--gold);">合計 ¥55,000</strong>
             </div>
