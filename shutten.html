@@ -109,12 +109,16 @@ img{display:block;width:100%;}
 .worry-grid{
   display:grid;grid-template-columns:1fr 1fr;gap:28px 64px;margin-top:16px;
 }
-.worry-item{display:flex;gap:20px;align-items:flex-start;}
+.worry-item{
+  display:flex;gap:20px;align-items:flex-start;
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:4px;padding:22px 24px;
+}
 .worry-num{
   font-family:"Cormorant Garamond",serif;font-size:36px;
   color:var(--gold);line-height:1;flex-shrink:0;
 }
-.worry-text{font-size:16px;color:var(--muted);line-height:1.8;padding-top:6px;}
+.worry-text{font-size:16px;color:var(--cream);line-height:1.8;padding-top:6px;}
 
 /* ===== Trust block ===== */
 .trust-block{
