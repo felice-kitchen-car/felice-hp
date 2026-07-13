@@ -112,46 +112,39 @@ section:last-of-type { border-bottom:none; }
   font-size:14px; color:var(--muted); line-height:1.9; max-width:640px;
 }
 
-/* ===== プラン比較表 ===== */
-.plan-compare {
-  display:grid; grid-template-columns:200px 1fr 1fr 1fr;
-  border:1px solid var(--border); margin-top:48px;
-  border-radius:6px; overflow:hidden;
+/* ===== プラン比較カード ===== */
+.plan-cards {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:28px;
+  margin-top:48px; align-items:stretch;
 }
-.pc-head {
-  background:var(--bg3); padding:20px 16px;
-  border-bottom:1px solid var(--border);
-  border-right:1px solid var(--border);
-  font-size:11px; letter-spacing:0.1em;
+.plan-card-cmp {
+  background:var(--bg3); border:1px solid var(--border);
+  border-radius:10px; padding:32px 26px; display:flex;
+  flex-direction:column;
 }
-.pc-head.tier-basic  { color:var(--muted); }
-.pc-head.tier-std    { color:var(--gold); }
-.pc-head.tier-prem   { color:var(--white); background:rgba(201,168,76,0.12); }
-.pc-head.tier-label  { background:var(--bg2); color:var(--muted); font-size:12px; }
-.pc-cell {
-  padding:18px 16px; border-bottom:1px solid var(--border);
-  border-right:1px solid var(--border); font-size:13px;
-  color:var(--muted); line-height:1.75;
+.plan-card-cmp.featured {
+  background:rgba(201,168,76,0.10); border:2px solid var(--gold);
 }
-.pc-cell:last-child, .pc-head:last-child { border-right:none; }
-.pc-cell.row-label {
-  background:var(--bg2); color:var(--cream); font-size:12px;
-  letter-spacing:0.05em; display:flex; align-items:center;
-}
-.pc-cell.price {
-  font-family:'Cormorant Garamond',serif; font-size:26px;
-  color:var(--white); font-weight:500; vertical-align:middle;
-}
-.pc-cell.price.std  { color:var(--gold); }
-.price-sub { font-size:11px; color:var(--muted); margin-top:2px; }
-.pc-cell.check { text-align:center; font-size:18px; }
-.check-yes { color:var(--gold); }
-.check-no  { color:rgba(255,255,255,0.2); }
 .recommend-badge {
   display:inline-block; background:var(--gold); color:#000;
-  font-size:9px; letter-spacing:0.1em; padding:2px 8px;
-  border-radius:2px; margin-top:4px;
+  font-size:11px; letter-spacing:0.1em; padding:4px 12px;
+  border-radius:3px; margin-bottom:14px; font-weight:700;
+  align-self:flex-start;
 }
+.pcc-tier { font-size:18px; letter-spacing:0.04em; color:var(--cream); margin-bottom:16px; font-weight:500; }
+.plan-card-cmp.featured .pcc-tier { color:var(--gold); }
+.pcc-price {
+  font-family:'Cormorant Garamond',serif; font-size:38px;
+  color:var(--white); font-weight:600; line-height:1.1;
+}
+.plan-card-cmp.featured .pcc-price { color:var(--gold); }
+.pcc-unit { font-size:13px; color:var(--muted); margin-top:6px; }
+.pcc-list { margin:20px 0; padding:18px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.pcc-row { padding:10px 0; }
+.pcc-row + .pcc-row { border-top:1px solid rgba(255,255,255,0.06); }
+.pcc-label { display:block; font-size:12px; letter-spacing:0.05em; color:var(--muted); margin-bottom:5px; }
+.pcc-value { display:block; font-size:16px; color:var(--cream); font-weight:500; line-height:1.5; }
+.pcc-for { font-size:14px; color:var(--cream); line-height:1.8; margin-top:16px; }
 
 /* ===== 料金の仕組み ===== */
 .formula-box {
@@ -228,20 +221,17 @@ section:last-of-type { border-bottom:none; }
   .plan-hero { padding:70px 20px 60px; }
   .wrap { padding:0 20px; }
   section { padding:60px 0; }
-  .plan-compare {
-    grid-template-columns:120px 1fr 1fr 1fr;
-    font-size:12px;
-  }
-  .pc-head, .pc-cell { padding:12px 8px; }
-  .pc-cell.price { font-size:20px; }
+  .plan-cards { grid-template-columns:1fr; gap:20px; }
+  .plan-card-cmp { padding:28px 24px; }
+  .pcc-tier { font-size:20px; }
+  .pcc-price { font-size:40px; }
+  .pcc-unit { font-size:14px; }
+  .pcc-label { font-size:14px; }
+  .pcc-value { font-size:18px; }
+  .pcc-for { font-size:15px; }
   .formula-box { padding:28px 20px; }
   .include-grid { grid-template-columns:1fr; }
   .cta-section { padding:70px 20px; }
-}
-@media(max-width:500px){
-  .plan-compare {
-    grid-template-columns:90px 1fr 1fr 1fr;
-  }
 }
 </style>
 </head>
@@ -269,37 +259,41 @@ section:last-of-type { border-bottom:none; }
       <h2 class="section-title">3つのプランから<br><em>お選びください。</em></h2>
       <p class="section-body">ご予算・イベントの規模・来場者数に合わせて最適なプランをお選びいただけます。ご不明な点はお気軽にご相談ください。</p>
 
-      <div class="plan-compare">
+      <div class="plan-cards">
 
-        <!-- ヘッダー行 -->
-        <div class="pc-head tier-label"></div>
-        <div class="pc-head tier-basic">ベーシック（Sサイズ）</div>
-        <div class="pc-head tier-std">スタンダード（Sサイズ）<br><span class="recommend-badge">POPULAR</span></div>
-        <div class="pc-head tier-prem">プレミアム（Mサイズ）</div>
+        <!-- ベーシック -->
+        <div class="plan-card-cmp">
+          <p class="pcc-tier">ベーシック（Sサイズ）</p>
+          <p class="pcc-price">¥50,000<span class="pcc-unit">（50枚買取）</span></p>
+          <div class="pcc-list">
+            <div class="pcc-row"><span class="pcc-label">1枚あたり</span><span class="pcc-value">¥1,000</span></div>
+            <div class="pcc-row"><span class="pcc-label">メニュー</span><span class="pcc-value">1種類（マルゲリータ）</span></div>
+          </div>
+          <p class="pcc-for">お手頃価格でイベントを盛り上げたい方</p>
+        </div>
 
-        <!-- 料金 -->
-        <div class="pc-cell row-label">料金（税込）</div>
-        <div class="pc-cell price">¥50,000<div class="price-sub">50枚買取</div></div>
-        <div class="pc-cell price std">¥60,000<div class="price-sub">50枚買取</div></div>
-        <div class="pc-cell price">¥80,000<div class="price-sub">50枚買取</div></div>
+        <!-- スタンダード -->
+        <div class="plan-card-cmp featured">
+          <span class="recommend-badge">POPULAR</span>
+          <p class="pcc-tier">スタンダード（Sサイズ）</p>
+          <p class="pcc-price">¥60,000<span class="pcc-unit">（50枚買取）</span></p>
+          <div class="pcc-list">
+            <div class="pcc-row"><span class="pcc-label">1枚あたり</span><span class="pcc-value">¥1,200</span></div>
+            <div class="pcc-row"><span class="pcc-label">メニュー</span><span class="pcc-value">厳選2種類</span></div>
+          </div>
+          <p class="pcc-for">中規模イベントを開催される方</p>
+        </div>
 
-        <!-- 枚数単価 -->
-        <div class="pc-cell row-label">1枚あたり</div>
-        <div class="pc-cell" style="color:var(--cream);">¥1,000</div>
-        <div class="pc-cell" style="color:var(--gold);">¥1,200</div>
-        <div class="pc-cell" style="color:var(--cream);">¥1,600</div>
-
-        <!-- メニュー種類 -->
-        <div class="pc-cell row-label">メニュー種類</div>
-        <div class="pc-cell">1種類<br><span style="font-size:11px;">(マルゲリータ)</span></div>
-        <div class="pc-cell" style="color:var(--gold);">厳選 2種類</div>
-        <div class="pc-cell">贅沢 4種類</div>
-
-        <!-- こんな方向け -->
-        <div class="pc-cell row-label">こんな方に</div>
-        <div class="pc-cell">お手頃価格でイベントを盛り上げたい方</div>
-        <div class="pc-cell" style="color:var(--muted);">中規模イベントを開催される方</div>
-        <div class="pc-cell">選べる楽しさで満足度を最大化したい方</div>
+        <!-- プレミアム -->
+        <div class="plan-card-cmp">
+          <p class="pcc-tier">プレミアム（Mサイズ）</p>
+          <p class="pcc-price">¥80,000<span class="pcc-unit">（50枚買取）</span></p>
+          <div class="pcc-list">
+            <div class="pcc-row"><span class="pcc-label">1枚あたり</span><span class="pcc-value">¥1,600</span></div>
+            <div class="pcc-row"><span class="pcc-label">メニュー</span><span class="pcc-value">贅沢4種類</span></div>
+          </div>
+          <p class="pcc-for">選べる楽しさで満足度を最大化したい方</p>
+        </div>
 
       </div>
     </div>
