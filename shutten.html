@@ -311,6 +311,13 @@ footer p{font-size:11px;color:var(--muted);}
   .worry-num{font-size:28px;}
   .worry-text{font-size:15px;}
 }
+.btn-detail{
+  display:inline-flex; align-items:center; gap:8px;
+  margin-top:28px; font-size:12px; font-weight:600; letter-spacing:.1em;
+  color:#000; background:var(--gold); border:1px solid var(--gold);
+  padding:13px 26px; border-radius:2px; transition:all .2s;
+}
+.btn-detail:hover{ background:var(--gold-light); border-color:var(--gold-light); transform:translateX(2px); }
 </style>
 
 <script type="application/ld+json">
@@ -438,7 +445,7 @@ footer p{font-size:11px;color:var(--muted);}
               <h3 class="plan-name">買取プラン</h3>
               <p class="plan-desc">指定枚数を買い取っていただくプランです。イベント・企業のお礼・感謝祭など幅広いシーンに対応します。</p>
             </div>
-            <a href="kaitori-plan.html" style="display:inline-block;margin-top:28px;font-size:11px;letter-spacing:.14em;color:var(--gold);border:1px solid rgba(201,168,76,.4);padding:11px 22px;border-radius:2px;">詳細ページへ →</a>
+            <a href="kaitori-plan.html" class="btn-detail">詳細ページへ →</a>
           </div>
           <div class="plan-card-right">
             <div class="plan-cards">
