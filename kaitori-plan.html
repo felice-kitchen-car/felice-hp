@@ -131,7 +131,8 @@ section:last-of-type { border-bottom:none; }
   border-radius:3px; margin-bottom:14px; font-weight:700;
   align-self:flex-start;
 }
-.pcc-tier { font-size:18px; letter-spacing:0.04em; color:var(--cream); margin-bottom:16px; font-weight:500; }
+.pcc-tier { font-size:18px; letter-spacing:0.04em; color:var(--cream); margin-bottom:16px; font-weight:500; line-height:1.4; min-height:50px; }
+.badge-spacer { visibility:hidden; }
 .plan-card-cmp.featured .pcc-tier { color:var(--gold); }
 .pcc-price {
   font-family:'Cormorant Garamond',serif; font-size:38px;
@@ -223,7 +224,8 @@ section:last-of-type { border-bottom:none; }
   section { padding:60px 0; }
   .plan-cards { grid-template-columns:1fr; gap:40px; }
   .plan-card-cmp { padding:20px 22px; }
-  .pcc-tier { font-size:20px; margin-bottom:10px; }
+  .pcc-tier { font-size:20px; margin-bottom:10px; min-height:0; }
+  .badge-spacer { display:none; }
   .pcc-price { font-size:36px; }
   .pcc-unit { font-size:14px; }
   .pcc-list { margin:12px 0; padding:12px 0; }
@@ -265,6 +267,7 @@ section:last-of-type { border-bottom:none; }
 
         <!-- ベーシック -->
         <div class="plan-card-cmp">
+          <span class="recommend-badge badge-spacer">POPULAR</span>
           <p class="pcc-tier">ベーシック<span style="white-space:nowrap;">（Sサイズ）</span></p>
           <p class="pcc-price">¥50,000<span class="pcc-unit">（50枚買取）</span></p>
           <div class="pcc-list">
@@ -288,6 +291,7 @@ section:last-of-type { border-bottom:none; }
 
         <!-- プレミアム -->
         <div class="plan-card-cmp">
+          <span class="recommend-badge badge-spacer">POPULAR</span>
           <p class="pcc-tier">プレミアム<span style="white-space:nowrap;">（Mサイズ）</span></p>
           <p class="pcc-price">¥80,000<span class="pcc-unit">（50枚買取）</span></p>
           <div class="pcc-list">
