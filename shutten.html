@@ -156,7 +156,8 @@ img{display:block;width:100%;}
 .plan-card-cmp{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:22px 20px;display:flex;flex-direction:column;}
 .plan-card-cmp.featured{background:rgba(201,168,76,0.10);border:2px solid var(--gold);}
 .plan-card-cmp .recommend-badge{display:inline-block;background:var(--gold);color:#000;font-size:10px;letter-spacing:0.1em;padding:3px 10px;border-radius:3px;margin-bottom:10px;font-weight:700;align-self:flex-start;}
-.pcc-tier{font-size:15px;letter-spacing:0.03em;color:var(--cream);margin-bottom:12px;font-weight:500;}
+.pcc-tier{font-size:15px;letter-spacing:0.03em;color:var(--cream);margin-bottom:12px;font-weight:500;line-height:1.4;min-height:42px;}
+.badge-spacer{visibility:hidden;}
 .plan-card-cmp.featured .pcc-tier{color:var(--gold);}
 .pcc-price{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--white);font-weight:600;line-height:1.1;}
 .plan-card-cmp.featured .pcc-price{color:var(--gold);}
@@ -294,7 +295,8 @@ footer p{font-size:11px;color:var(--muted);}
   .plan-card{grid-template-columns:1fr;}
   .plan-card-left{border-right:none;border-bottom:1px solid var(--border);}
   .plan-cards{grid-template-columns:1fr;gap:14px;}
-  .pcc-tier{font-size:18px;}
+  .pcc-tier{font-size:18px;min-height:0;}
+  .badge-spacer{display:none;}
   .pcc-price{font-size:34px;}
   .pcc-unit{font-size:13px;}
   .pcc-label{font-size:13px;}
@@ -441,6 +443,7 @@ footer p{font-size:11px;color:var(--muted);}
           <div class="plan-card-right">
             <div class="plan-cards">
               <div class="plan-card-cmp">
+                <span class="recommend-badge badge-spacer">POPULAR</span>
                 <p class="pcc-tier">ベーシック<span style="white-space:nowrap;">（Sサイズ）</span></p>
                 <p class="pcc-price">¥50,000<span class="pcc-unit">（50枚）</span></p>
                 <div class="pcc-list">
@@ -458,6 +461,7 @@ footer p{font-size:11px;color:var(--muted);}
                 <p class="pcc-for">中規模イベントを開催される方</p>
               </div>
               <div class="plan-card-cmp">
+                <span class="recommend-badge badge-spacer">POPULAR</span>
                 <p class="pcc-tier">プレミアム<span style="white-space:nowrap;">（Mサイズ）</span></p>
                 <p class="pcc-price">¥80,000<span class="pcc-unit">（50枚）</span></p>
                 <div class="pcc-list">
