@@ -454,13 +454,16 @@
 .mini-plan-label { font-size:9px; letter-spacing:.15em; color:var(--gold); margin-bottom:8px; }
 .mini-plan-name { font-family:'Cormorant Garamond',serif; font-size:17px; color:var(--white); margin-bottom:6px; line-height:1.3; }
 .mini-plan-detail { font-size:10px; color:var(--cream); line-height:1.6; }
+.mp-sep { display:none; }
 @media(max-width:680px){
   .mini-plan-grid { grid-template-columns:1fr; gap:8px; }
   .mini-plan-card.mid { border-left:none; border-right:none; }
-  .mini-plan-card { padding:12px 20px; }
-  .mini-plan-label { font-size:12px; margin-bottom:4px; }
-  .mini-plan-name { font-size:20px; margin-bottom:2px; line-height:1.15; }
-  .mini-plan-detail { font-size:13px; line-height:1.4; }
+  .mini-plan-card { padding:14px 18px; text-align:left; display:flex; align-items:baseline; flex-wrap:wrap; column-gap:10px; row-gap:2px; }
+  .mini-plan-label { font-size:11px; margin-bottom:0; display:inline; flex-shrink:0; }
+  .mini-plan-name { font-size:17px; margin-bottom:0; line-height:1.3; display:inline; }
+  .mini-plan-detail { font-size:13px; line-height:1.4; width:100%; }
+  .mp-br { display:none; }
+  .mp-sep { display:inline; color:var(--gold); margin:0 6px; opacity:.6; }
 }
 </style>
   <script type="application/ld+json">
@@ -745,18 +748,18 @@
     <div class="mini-plan-grid">
       <div class="mini-plan-card">
         <p class="mini-plan-label">PLAN 01</p>
-        <p class="mini-plan-name">買取<br>プラン</p>
-        <p class="mini-plan-detail">¥50,000〜<br>指定枚数の買取</p>
+        <p class="mini-plan-name">買取<br class="mp-br">プラン</p>
+        <p class="mini-plan-detail">¥50,000〜<span class="mp-sep">・</span><br class="mp-br">指定枚数の買取</p>
       </div>
       <div class="mini-plan-card mid">
         <p class="mini-plan-label">PLAN 02</p>
-        <p class="mini-plan-name">ピザ焼き<br>体験</p>
-        <p class="mini-plan-detail">¥3,000/人<br>体験イベント</p>
+        <p class="mini-plan-name">ピザ焼き<br class="mp-br">体験</p>
+        <p class="mini-plan-detail">¥3,000/人<span class="mp-sep">・</span><br class="mp-br">体験イベント</p>
       </div>
       <div class="mini-plan-card">
         <p class="mini-plan-label">PLAN 03</p>
-        <p class="mini-plan-name">通常<br>出店</p>
-        <p class="mini-plan-detail">要相談<br>スペース借りて出店</p>
+        <p class="mini-plan-name">通常<br class="mp-br">出店</p>
+        <p class="mini-plan-detail">要相談<span class="mp-sep">・</span><br class="mp-br">スペース借りて出店</p>
       </div>
     </div>
     <div style="display:flex; flex-direction:column; align-items:center; gap:14px; margin-top:40px;">
