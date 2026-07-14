@@ -134,6 +134,8 @@ img{display:block;width:100%;}
 
 /* ===== Plan cards ===== */
 .plans-stack{display:flex;flex-direction:column;gap:40px;}
+.plan-card+.plan-card{position:relative;}
+.plan-card+.plan-card::before{content:'';position:absolute;top:-20px;left:0;right:0;height:1px;background:var(--border);}
 .plan-card{
   background:var(--bg3);
   display:grid;grid-template-columns:280px 1fr;
