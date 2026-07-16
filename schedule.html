@@ -130,8 +130,7 @@
 
 <script>
 (function(){
-  var GCAL_KEY = 'AIzaSyCAIFXUThYs_nnz002j9Id70XBQ6H3P8Lk';
-  var GCAL_ID  = 'e5ac2f1a6abfd1d0c52d026a9911ca98408ae7a642b6f26eedb7203478996e10@group.calendar.google.com';
+  var DATA_URL = 'https://pizza-order-bx2.pages.dev/api/calendar';
   var WD  = ['日','月','火','水','木','金','土'];
   var MON_JA = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
 
@@ -141,32 +140,23 @@
 
   function pad(n){ return ('0'+n).slice(-2); }
 
-  var now = new Date();
+  var now = new Date(); now.setHours(0,0,0,0);
   // 6か月先まで取得
   var sixMonths = new Date(now.getTime() + 180 * 24 * 60 * 60 * 1000);
 
-  var gcalUrl = 'https://www.googleapis.com/calendar/v3/calendars/'
-              + encodeURIComponent(GCAL_ID)
-              + '/events?key=' + GCAL_KEY
-              + '&timeMin=' + encodeURIComponent(now.toISOString())
-              + '&timeMax=' + encodeURIComponent(sixMonths.toISOString())
-              + '&singleEvents=true&orderBy=startTime&maxResults=200';
-
-  fetch(gcalUrl)
+  fetch(DATA_URL + '?t=' + Date.now(), {cache:'no-store'})
     .then(function(r){ return r.json(); })
-    .then(function(gcal){
-      var events = (gcal.items || []).map(function(item){
-        var dateStr = item.start.date ? item.start.date : item.start.dateTime.slice(0,10);
-        var timeStr = '';
-        if (item.start.dateTime && item.end && item.end.dateTime) {
-          var s = new Date(item.start.dateTime);
-          var e = new Date(item.end.dateTime);
-          timeStr = pad(s.getHours()) + ':' + pad(s.getMinutes())
-                  + '〜' + pad(e.getHours()) + ':' + pad(e.getMinutes());
-        }
-        var name = (item.summary || '').replace(/^【[^】]*】\s*/, '');
-        return { date: dateStr, name: name, location: item.location || '', time: timeStr };
-      }).sort(function(a,b){ return a.date < b.date ? -1 : 1; });
+    .then(function(data){
+      var events = (data.events || [])
+        .filter(function(e){
+          var d = new Date(e.date + 'T00:00:00+09:00');
+          return d >= now && d <= sixMonths;
+        })
+        .map(function(e){
+          var timeStr = e.timeStart ? (e.timeStart + '〜' + (e.timeEnd || e.timeStart)) : '';
+          return { date: e.date, name: e.loc, location: e.address || e.loc, time: timeStr };
+        })
+        .sort(function(a,b){ return a.date < b.date ? -1 : 1; });
 
       if (events.length === 0) {
         document.getElementById('scheduleRoot').innerHTML =
