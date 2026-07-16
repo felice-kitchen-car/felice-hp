@@ -929,64 +929,40 @@ function escHtml(s){
 }
 
 // ================================================================
-//  カレンダー連動
-//  ① Googleカレンダー → 出店スケジュール一覧
-//  ② info.json → NEXT EVENTカード（今日のメッセージ・メニュー）
+//  カレンダー連動（管理アプリのデータを直接読み込む）
+//  ① 出店スケジュール一覧
+//  ② NEXT EVENTカード（今日のメッセージ・メニュー）
 // ================================================================
 (function(){
-  var INFO_URL  = 'https://felice-kitchen-car.github.io/felice-calendar/info.json';
-  var GCAL_KEY  = 'AIzaSyCAIFXUThYs_nnz002j9Id70XBQ6H3P8Lk';
-  var GCAL_ID   = 'e5ac2f1a6abfd1d0c52d026a9911ca98408ae7a642b6f26eedb7203478996e10@group.calendar.google.com';
+  var DATA_URL = 'https://pizza-order-bx2.pages.dev/api/calendar';
 
-  // ① Googleカレンダーから出店スケジュールを取得（直近1週間）
-  var now      = new Date();
-  var oneWeek  = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
-  var gcalUrl  = 'https://www.googleapis.com/calendar/v3/calendars/'
-               + encodeURIComponent(GCAL_ID)
-               + '/events?key=' + GCAL_KEY
-               + '&timeMin=' + encodeURIComponent(now.toISOString())
-               + '&timeMax=' + encodeURIComponent(oneWeek.toISOString())
-               + '&singleEvents=true&orderBy=startTime&maxResults=20';
-
-  fetch(gcalUrl)
+  fetch(DATA_URL + '?t=' + Date.now(), {cache:'no-store'})
     .then(function(r){ return r.json(); })
-    .then(function(gcal){
-      var pad = function(n){ return ('0' + n).slice(-2); };
-      var events = (gcal.items || []).map(function(item){
-        var dateStr = item.start.date
-          ? item.start.date
-          : item.start.dateTime.slice(0, 10);
-        var timeStr = '';
-        if (item.start.dateTime && item.end && item.end.dateTime) {
-          var s = new Date(item.start.dateTime);
-          var e = new Date(item.end.dateTime);
-          timeStr = pad(s.getHours()) + ':' + pad(s.getMinutes())
-                  + '〜' + pad(e.getHours()) + ':' + pad(e.getMinutes());
-        }
-        // 「【出店】」などのプレフィックスを除去してイベント名を整形
-        var name = (item.summary || '').replace(/^【[^】]*】\s*/, '');
-        return {
-          date:     dateStr,
-          name:     name,
-          location: item.location || '',
-          time:     timeStr,
-          note:     ''
-        };
-      });
-      renderSchedule(events);
-    })
-    .catch(function(){
-      renderSchedule([]); // 取得失敗時は空表示
-    });
-
-  // ② info.json から NEXT EVENTカード（今日のメッセージ・メニュー）を取得
-  fetch(INFO_URL + '?_=' + Date.now())
-    .then(function(r){
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      return r.json();
-    })
     .then(function(data){
-      var msg = data.info && data.info.msg ? data.info.msg.trim() : '';
+      // ① 出店スケジュール（直近1週間）
+      var now     = new Date(); now.setHours(0,0,0,0);
+      var oneWeek = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+      var events = (data.events || [])
+        .filter(function(e){
+          var d = new Date(e.date + 'T00:00:00+09:00');
+          return d >= now && d <= oneWeek;
+        })
+        .sort(function(a,b){ return a.date < b.date ? -1 : (a.date > b.date ? 1 : 0); })
+        .slice(0, 20)
+        .map(function(e){
+          var timeStr = e.timeStart ? (e.timeStart + '〜' + (e.timeEnd || e.timeStart)) : '';
+          return {
+            date:     e.date,
+            name:     e.loc,
+            location: e.address || e.loc,
+            time:     timeStr,
+            note:     e.note || ''
+          };
+        });
+      renderSchedule(events);
+
+      // ② NEXT EVENTカード（今日のメッセージ・メニュー）
+      var msg = data.siteInfo && data.siteInfo.msg ? data.siteInfo.msg.trim() : '';
       if (msg) {
         var card   = document.getElementById('nextEventCard');
         var msgEl  = document.getElementById('nextEventMsg');
