@@ -209,10 +209,10 @@
     .section { padding: 120px 48px; }
     .section-inner { max-width: 1280px; margin: 0 auto; }
     .section-overline {
-      display: flex; align-items: center; gap: 16px; margin-bottom: 20px;
+      display: inline-flex; align-items: center; margin-bottom: 20px;
+      background: var(--bg3); border-left: 3px solid var(--gold); padding: 8px 20px;
     }
-    .section-overline::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
-    .section-overline span { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); }
+    .section-overline span { font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); }
     .section-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(36px, 5vw, 62px); font-weight: 400;
