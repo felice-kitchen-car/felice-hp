@@ -87,7 +87,8 @@ img{display:block;width:100%;}
 .wrap{max-width:960px;margin:0 auto;padding:0 48px;}
 .section{padding:96px 0;border-bottom:1px solid var(--border);}
 .section:last-of-type{border-bottom:none;}
-.sec-label{font-size:11px;letter-spacing:.24em;color:var(--gold);text-transform:uppercase;margin-bottom:14px;display:inline-flex;align-items:center;border:1px solid rgba(201,168,76,.5);border-radius:20px;padding:7px 18px;background:rgba(201,168,76,.06);}
+.sec-label{font-size:11px;letter-spacing:.24em;color:var(--gold);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:14px;}
+.sec-label::before{content:'';display:block;width:32px;height:1px;background:var(--gold);flex-shrink:0;}
 .sec-title{
   font-family:"Cormorant Garamond",serif;
   font-size:clamp(30px,4.5vw,52px);font-weight:400;
