@@ -958,9 +958,9 @@ function escHtml(s){
           return {
             date:     e.date,
             name:     e.loc,
-            location: e.address || e.loc,
+            location: e.loc,
             time:     timeStr,
-            note:     e.note || ''
+            note:     e.statusMsg || ''
           };
         });
       renderSchedule(events);
