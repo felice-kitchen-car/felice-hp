@@ -155,7 +155,7 @@
         })
         .map(function(e){
           var timeStr = e.timeStart ? (e.timeStart + '〜' + (e.timeEnd || e.timeStart)) : '';
-          return { date: e.date, name: e.loc, location: e.address || e.loc, time: timeStr };
+          return { date: e.date, name: e.loc, location: e.loc, time: timeStr };
         })
         .sort(function(a,b){ return a.date < b.date ? -1 : 1; });
 
