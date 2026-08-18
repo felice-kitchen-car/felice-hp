@@ -64,9 +64,25 @@
     .page-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px,5vw,44px); font-weight: 400; letter-spacing: .1em; color: var(--white); margin-bottom: 8px; }
     .page-sub { font-size: 12px; letter-spacing: .2em; color: var(--gold); text-transform: uppercase; margin-bottom: 48px; }
 
+    /* 月ナビゲーション */
+    .month-nav { display:flex; align-items:center; justify-content:center; gap:20px; margin-bottom: 36px; }
+    .month-nav button {
+      width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(201,168,76,.4);
+      background: transparent; color: var(--gold); font-size: 18px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: background .15s;
+      font-family: inherit;
+    }
+    .month-nav button:hover { background: rgba(201,168,76,.12); }
+    .month-nav button:disabled { opacity: .3; cursor: default; }
+    .month-nav button:disabled:hover { background: transparent; }
+    .month-nav .month-label {
+      font-family: 'Cormorant Garamond', serif; font-size: 24px; letter-spacing: .12em;
+      color: var(--white); min-width: 160px; text-align: center; margin: 0; border: none; padding: 0;
+    }
+
     /* 月区切り */
     .month-block { margin-bottom: 48px; }
-    .month-label { font-family: 'Cormorant Garamond', serif; font-size: 22px; letter-spacing: .15em; color: var(--gold); border-bottom: 1px solid rgba(201,168,76,.25); padding-bottom: 10px; margin-bottom: 4px; }
+    .empty-month { text-align:center; color:var(--muted); padding: 50px 0; font-size:14px; }
 
     /* イベント行 */
     .event-row {
@@ -121,6 +137,12 @@
   <p class="page-sub">Schedule</p>
   <h1 class="page-title">出店スケジュール</h1>
 
+  <div class="month-nav">
+    <button id="prevMonthBtn" aria-label="前の月">&#8249;</button>
+    <p class="month-label" id="monthLabel">&nbsp;</p>
+    <button id="nextMonthBtn" aria-label="次の月">&#8250;</button>
+  </div>
+
   <div id="scheduleRoot"><p class="loading">読み込み中...</p></div>
 </div>
 
@@ -141,94 +163,109 @@
 
   function pad(n){ return ('0'+n).slice(-2); }
 
-  var now = new Date(); now.setHours(0,0,0,0);
-  // 6か月先まで取得
-  var sixMonths = new Date(now.getTime() + 180 * 24 * 60 * 60 * 1000);
+  var today = new Date(); today.setHours(0,0,0,0);
+  var cy = today.getFullYear(), cm = today.getMonth(); // 表示中の年月（今月から開始）
+  var allEvents = []; // 取得した全予定（過去・未来とも）
+  var loaded = false;
+
+  var prevBtn = document.getElementById('prevMonthBtn');
+  var nextBtn = document.getElementById('nextMonthBtn');
+  var monthLabelEl = document.getElementById('monthLabel');
+  var rootEl = document.getElementById('scheduleRoot');
+
+  function render(){
+    monthLabelEl.textContent = cy + '年 ' + MON_JA[cm];
+
+    if (!loaded) {
+      rootEl.innerHTML = '<p class="loading">読み込み中...</p>';
+      return;
+    }
+
+    var prefix = cy + '-' + pad(cm + 1);
+    var monthEvents = allEvents
+      .filter(function(ev){ return ev.date.indexOf(prefix) === 0; })
+      .sort(function(a,b){ return a.date < b.date ? -1 : 1; });
+
+    if (monthEvents.length === 0) {
+      rootEl.innerHTML = '<p class="empty-month">この月の出店予定はありません</p>';
+      return;
+    }
+
+    var html = '<div class="month-block">';
+    monthEvents.forEach(function(ev){
+      var d   = new Date(ev.date + 'T00:00:00');
+      var day = d.getDate();
+      var wd  = d.getDay();
+      var wdLabel = WD[wd];
+      var wdClass = wd === 0 ? 'sun' : wd === 6 ? 'sat' : 'wkd';
+      html += '<div class="event-row">';
+      html += '<div class="ev-date">'
+            + '<span class="day">' + pad(day) + '</span>'
+            + '<span class="wd ' + wdClass + '">(' + wdLabel + ')</span>'
+            + '</div>';
+      html += '<div class="ev-info">'
+            + '<p class="ev-name">' + escHtml(ev.name) + '</p>'
+            + (ev.location ? '<p class="ev-loc">&#128205; <a href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(ev.location) + '" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">' + escHtml(ev.location) + '</a></p>' : '')
+            + '</div>';
+      html += '<div class="ev-time">' + escHtml(ev.time) + '</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+    rootEl.innerHTML = html;
+  }
+
+  function changeMonth(dir){
+    cm += dir;
+    if (cm > 11) { cm = 0; cy++; }
+    if (cm < 0)  { cm = 11; cy--; }
+    render();
+  }
+
+  prevBtn.addEventListener('click', function(){ changeMonth(-1); });
+  nextBtn.addEventListener('click', function(){ changeMonth(1); });
+
+  render(); // 読み込み中表示をすぐ出す
 
   fetch(DATA_URL + '?t=' + Date.now(), {cache:'no-store'})
     .then(function(r){ return r.json(); })
     .then(function(data){
-      var events = (data.events || [])
-        .filter(function(e){
-          var d = new Date(e.date + 'T00:00:00+09:00');
-          return d >= now && d <= sixMonths;
-        })
-        .map(function(e){
-          var timeStr = e.timeStart ? (e.timeStart + '〜' + (e.timeEnd || e.timeStart)) : '';
-          return { date: e.date, name: e.loc, location: e.loc, time: timeStr };
-        })
-        .sort(function(a,b){ return a.date < b.date ? -1 : 1; });
-
-      if (events.length === 0) {
-        document.getElementById('scheduleRoot').innerHTML =
-          '<p class="loading">現在スケジュールはありません。</p>';
-        return;
-      }
-
-      // 月ごとにグループ化
-      var months = {};
-      events.forEach(function(ev){
-        var key = ev.date.slice(0,7); // YYYY-MM
-        if (!months[key]) months[key] = [];
-        months[key].push(ev);
+      allEvents = (data.events || []).map(function(e){
+        var timeStr = e.timeStart ? (e.timeStart + '〜' + (e.timeEnd || e.timeStart)) : '';
+        return { date: e.date, name: e.loc, location: e.loc, time: timeStr };
       });
+      loaded = true;
+      render();
 
-      var html = '';
-      Object.keys(months).sort().forEach(function(key){
-        var yr = parseInt(key.slice(0,4));
-        var mo = parseInt(key.slice(5,7)) - 1;
-        html += '<div class="month-block">';
-        html += '<p class="month-label">' + yr + '年 ' + MON_JA[mo] + '</p>';
-        months[key].forEach(function(ev){
-          var d   = new Date(ev.date + 'T00:00:00');
-          var day = d.getDate();
-          var wd  = d.getDay();
-          var wdLabel = WD[wd];
-          var wdClass = wd === 0 ? 'sun' : wd === 6 ? 'sat' : 'wkd';
-          html += '<div class="event-row">';
-          html += '<div class="ev-date">'
-                + '<span class="day">' + pad(day) + '</span>'
-                + '<span class="wd ' + wdClass + '">(' + wdLabel + ')</span>'
-                + '</div>';
-          html += '<div class="ev-info">'
-                + '<p class="ev-name">' + escHtml(ev.name) + '</p>'
-                + (ev.location ? '<p class="ev-loc">&#128205; <a href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(ev.location) + '" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">' + escHtml(ev.location) + '</a></p>' : '')
-                + '</div>';
-          html += '<div class="ev-time">' + escHtml(ev.time) + '</div>';
-          html += '</div>';
-        });
-        html += '</div>';
-      });
-
-      document.getElementById('scheduleRoot').innerHTML = html;
-
-      // 検索エンジン向け：出店予定をイベント構造化データとして埋め込む
-      // ※場所が入っている予定だけを対象にする（場所なしはGoogleでエラーになるため）
+      // 検索エンジン向け：今後の出店予定をイベント構造化データとして埋め込む
+      // ※場所が入っている・今日以降の予定だけを対象にする（過去や場所なしはGoogleでエラーになるため）
       try {
-        var ldEvents = events.filter(function(ev){ return ev.location; }).map(function(ev){
-          var ld = {
-            "@context": "https://schema.org",
-            "@type": "Event",
-            "name": "FELICE キッチンカー出店：" + ev.name,
-            "startDate": ev.date,
-            "eventStatus": "https://schema.org/EventScheduled",
-            "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-            "image": "https://felice-foodtruck.com/images/pizza-margherita.jpg",
-            "description": "本格石窯ナポリピザのキッチンカー FELICE が「" + ev.name + "」に出店します。",
-            "organizer": {
-              "@type": "Organization",
-              "name": "FELICE キッチンカー石窯ピッツァ",
-              "url": "https://felice-foodtruck.com"
+        var todayStr = today.getFullYear() + '-' + pad(today.getMonth()+1) + '-' + pad(today.getDate());
+        var ldEvents = allEvents
+          .filter(function(ev){ return ev.location && ev.date >= todayStr; })
+          .map(function(ev){
+            var ld = {
+              "@context": "https://schema.org",
+              "@type": "Event",
+              "name": "FELICE キッチンカー出店：" + ev.name,
+              "startDate": ev.date,
+              "eventStatus": "https://schema.org/EventScheduled",
+              "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+              "image": "https://felice-foodtruck.com/images/pizza-margherita.jpg",
+              "description": "本格石窯ナポリピザのキッチンカー FELICE が「" + ev.name + "」に出店します。",
+              "organizer": {
+                "@type": "Organization",
+                "name": "FELICE キッチンカー石窯ピッツァ",
+                "url": "https://felice-foodtruck.com"
+              }
+            };
+            if (ev.time) {
+              var t = ev.time.split('〜');
+              if (t[0]) ld.startDate = ev.date + 'T' + t[0] + ':00+09:00';
+              if (t[1]) ld.endDate = ev.date + 'T' + t[1] + ':00+09:00';
             }
-          };
-          if (ev.time) {
-            var t = ev.time.split('〜');
-            if (t[0]) ld.startDate = ev.date + 'T' + t[0] + ':00+09:00';
-            if (t[1]) ld.endDate = ev.date + 'T' + t[1] + ':00+09:00';
-          }
-          ld.location = { "@type": "Place", "name": ev.location, "address": ev.location };
-          return ld;
-        });
+            ld.location = { "@type": "Place", "name": ev.location, "address": ev.location };
+            return ld;
+          });
         var ldTag = document.createElement('script');
         ldTag.type = 'application/ld+json';
         ldTag.text = JSON.stringify(ldEvents);
@@ -236,8 +273,7 @@
       } catch(e) {}
     })
     .catch(function(e){
-      document.getElementById('scheduleRoot').innerHTML =
-        '<p class="loading">スケジュールの取得に失敗しました。</p>';
+      rootEl.innerHTML = '<p class="loading">スケジュールの取得に失敗しました。</p>';
     });
 })();
 </script>
