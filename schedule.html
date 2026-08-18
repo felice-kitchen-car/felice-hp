@@ -84,6 +84,19 @@
     .month-block { margin-bottom: 48px; }
     .empty-month { text-align:center; color:var(--muted); padding: 50px 0; font-size:14px; }
 
+    /* 本日の出店 */
+    .event-row.today {
+      background: rgba(201,168,76,.08);
+      border-left: 3px solid var(--gold);
+      border-bottom-color: rgba(201,168,76,.25);
+      padding-left: 13px; margin-left: -16px; padding-right: 16px;
+    }
+    .today-badge {
+      display: inline-block; font-size: 10px; letter-spacing: .1em; font-weight: 600;
+      color: var(--bg); background: var(--gold); border-radius: 3px;
+      padding: 2px 7px; margin-left: 10px; vertical-align: middle;
+    }
+
     /* イベント行 */
     .event-row {
       display: grid;
@@ -164,6 +177,7 @@
   function pad(n){ return ('0'+n).slice(-2); }
 
   var today = new Date(); today.setHours(0,0,0,0);
+  var todayStr = today.getFullYear() + '-' + pad(today.getMonth()+1) + '-' + pad(today.getDate());
   var cy = today.getFullYear(), cm = today.getMonth(); // 表示中の年月（今月から開始）
   var allEvents = []; // 取得した全予定（過去・未来とも）
   var loaded = false;
@@ -198,13 +212,14 @@
       var wd  = d.getDay();
       var wdLabel = WD[wd];
       var wdClass = wd === 0 ? 'sun' : wd === 6 ? 'sat' : 'wkd';
-      html += '<div class="event-row">';
+      var isToday = ev.date === todayStr;
+      html += '<div class="event-row' + (isToday ? ' today' : '') + '">';
       html += '<div class="ev-date">'
             + '<span class="day">' + pad(day) + '</span>'
             + '<span class="wd ' + wdClass + '">(' + wdLabel + ')</span>'
             + '</div>';
       html += '<div class="ev-info">'
-            + '<p class="ev-name">' + escHtml(ev.name) + '</p>'
+            + '<p class="ev-name">' + escHtml(ev.name) + (isToday ? '<span class="today-badge">TODAY</span>' : '') + '</p>'
             + (ev.location ? '<p class="ev-loc">&#128205; <a href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(ev.location) + '" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">' + escHtml(ev.location) + '</a></p>' : '')
             + '</div>';
       html += '<div class="ev-time">' + escHtml(ev.time) + '</div>';
@@ -239,7 +254,6 @@
       // 検索エンジン向け：今後の出店予定をイベント構造化データとして埋め込む
       // ※場所が入っている・今日以降の予定だけを対象にする（過去や場所なしはGoogleでエラーになるため）
       try {
-        var todayStr = today.getFullYear() + '-' + pad(today.getMonth()+1) + '-' + pad(today.getDate());
         var ldEvents = allEvents
           .filter(function(ev){ return ev.location && ev.date >= todayStr; })
           .map(function(ev){
