@@ -796,6 +796,7 @@
         <a href="tel:09045944246" style="flex:1; display:block; text-align:center; white-space:nowrap; border:1px solid var(--border); color:var(--white); font-size:12px; letter-spacing:.04em; padding:14px 4px; border-radius:2px;">📞 電話する</a>
         <a href="contact.html" style="flex:1; display:block; text-align:center; white-space:nowrap; border:1px solid rgba(201,168,76,.4); color:#C9A84C; font-size:12px; letter-spacing:.04em; padding:14px 4px; border-radius:2px;">✉ お問い合わせ</a>
       </div>
+      <a href="houjin.html" style="font-size:12px; color:var(--muted); text-decoration:underline; margin-top:4px;">法人・企業様のご担当者様はこちら</a>
     </div>
   </div>
 </section>
@@ -823,6 +824,7 @@
       <a href="#about">FELICEについて</a>
       <a href="story.html">オーナーの想い</a>
       <a href="shutten.html">出店依頼</a>
+      <a href="houjin.html">法人のお客様へ</a>
       <a href="#youtube">YouTube</a>
     </nav>
     <div class="footer-contact">
@@ -958,7 +960,7 @@ function escHtml(s){
           return {
             date:     e.date,
             name:     e.loc,
-            location: e.loc,
+            location: e.address || e.loc,
             time:     timeStr,
             note:     e.statusMsg || ''
           };
