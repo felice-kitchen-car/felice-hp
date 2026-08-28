@@ -246,7 +246,7 @@
     .then(function(data){
       allEvents = (data.events || []).map(function(e){
         var timeStr = e.timeStart ? (e.timeStart + '〜' + (e.timeEnd || e.timeStart)) : '';
-        return { date: e.date, name: e.loc, location: e.loc, time: timeStr };
+        return { date: e.date, name: e.loc, location: e.address || e.loc, time: timeStr };
       });
       loaded = true;
       render();
