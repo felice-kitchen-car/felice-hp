@@ -116,6 +116,7 @@
     .ev-info { padding: 0 16px; }
     .ev-name { font-size: 15px; color: var(--white); margin-bottom: 4px; line-height: 1.4; }
     .ev-loc  { font-size: 12px; color: var(--cream); }
+    .ev-note { font-size: 12px; color: #e06060; margin-top: 4px; font-weight: 500; }
     .ev-time { font-size: 12px; color: rgba(201,168,76,.8); white-space: nowrap; text-align: right; }
 
     /* ローディング・空 */
@@ -221,6 +222,7 @@
       html += '<div class="ev-info">'
             + '<p class="ev-name">' + escHtml(ev.name) + (isToday ? '<span class="today-badge">TODAY</span>' : '') + '</p>'
             + (ev.location ? '<p class="ev-loc">&#128205; <a href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(ev.location) + '" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">' + escHtml(ev.location) + '</a></p>' : '')
+            + (ev.note ? '<p class="ev-note">&#x26a0;&#xfe0f; ' + escHtml(ev.note) + '</p>' : '')
             + '</div>';
       html += '<div class="ev-time">' + escHtml(ev.time) + '</div>';
       html += '</div>';
@@ -246,7 +248,7 @@
     .then(function(data){
       allEvents = (data.events || []).map(function(e){
         var timeStr = e.timeStart ? (e.timeStart + '〜' + (e.timeEnd || e.timeStart)) : '';
-        return { date: e.date, name: e.loc, location: e.address || '', time: timeStr };
+        return { date: e.date, name: e.loc, location: e.address || '', time: timeStr, note: e.statusMsg || '' };
       });
       loaded = true;
       render();
