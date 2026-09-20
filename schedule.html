@@ -118,6 +118,17 @@
     .ev-loc  { font-size: 12px; color: var(--cream); }
     .ev-note { font-size: 12px; color: #e06060; margin-top: 4px; font-weight: 500; }
     .ev-time { font-size: 12px; color: rgba(201,168,76,.8); white-space: nowrap; text-align: right; }
+    .btn-preorder {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 8px; font-size: 12px; font-weight: 500;
+      color: #000; background: var(--gold);
+      padding: 6px 14px; border-radius: 20px;
+      text-decoration: none; transition: opacity .2s;
+    }
+    .btn-preorder:hover { opacity: .85; }
+    @media(max-width:600px){
+      .btn-preorder { font-size: 11px; padding: 6px 12px; }
+    }
 
     /* ローディング・空 */
     .loading { text-align:center; color:var(--muted); padding: 60px 0; font-size:14px; }
@@ -168,6 +179,8 @@
 <script>
 (function(){
   var DATA_URL = 'https://pizza-order-bx2.pages.dev/api/calendar';
+  var ORDER_SITE = 'https://pizza-order-bx2.pages.dev';
+  var PREORDER_LOC = 'FELICE BASE'; // 事前注文（テイクアウト）ができるのはこの場所の日だけ
   var WD  = ['日','月','火','水','木','金','土'];
   var MON_JA = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
 
@@ -223,6 +236,7 @@
             + '<p class="ev-name">' + escHtml(ev.name) + (isToday ? '<span class="today-badge">TODAY</span>' : '') + '</p>'
             + (ev.location ? '<p class="ev-loc">&#128205; <a href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(ev.location) + '" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">' + escHtml(ev.location) + '</a></p>' : '')
             + (ev.note ? '<p class="ev-note">&#x26a0;&#xfe0f; ' + escHtml(ev.note) + '</p>' : '')
+            + (ev.name === PREORDER_LOC ? '<a href="' + ORDER_SITE + '" target="_blank" class="btn-preorder">&#128722; 事前注文する</a>' : '')
             + '</div>';
       html += '<div class="ev-time">' + escHtml(ev.time) + '</div>';
       html += '</div>';
